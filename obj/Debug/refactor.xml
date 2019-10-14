@@ -14,4 +14,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="LocationNo" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="ff87d096-dd18-4fd2-9ce0-801b432a3b36" ChangeDateTime="10/14/2019 20:53:58" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[Location].[Telephone]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Location]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Province" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f50f4909-4f43-4dd5-9ecd-0885c77a3a38" ChangeDateTime="10/14/2019 20:54:38" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[Location].[Email]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Location]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Site" />
+  </Operation>
 </Operations>
