@@ -3,7 +3,7 @@
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [LocationNo] INT NOT NULL, 
     [Name] VARCHAR(200) NOT NULL, 
-	[RegionId] INT NULL,
+	[RegionId] INT NOT NULL,
     [Telephone] VARCHAR(200) NULL, 
     [Email] VARCHAR(200) NULL, 
     [Address1] VARCHAR(200) NOT NULL, 
