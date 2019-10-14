@@ -66,6 +66,7 @@
     <Build Include="Tables\Location.sql" />
     <Build Include="Tables\UserLocation.sql" />
     <Build Include="UserTypes\TVPUserType.sql" />
+    <Build Include="Tables\Region.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />
