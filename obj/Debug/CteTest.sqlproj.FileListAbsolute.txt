@@ -1,0 +1,10 @@
+C:\Users\lukas\source\repos\CteTest\bin\Debug\CteTest.dacpac
+C:\Users\lukas\source\repos\CteTest\bin\Debug\CteTest.dll
+C:\Users\lukas\source\repos\CteTest\bin\Debug\CteTest.pdb
+C:\Users\lukas\source\repos\CteTest\obj\Debug\CteTest.sqlprojAssemblyReference.cache
+C:\Users\lukas\source\repos\CteTest\obj\Debug\CteTest.dll
+C:\Users\lukas\source\repos\CteTest\obj\Debug\CteTest.pdb
+C:\Users\lukas\source\repos\CteTest\obj\Debug\Model.xml
+C:\Users\lukas\source\repos\CteTest\obj\Debug\refactor.xml
+C:\Users\lukas\source\repos\CteTest\obj\Debug\postdeploy.sql
+C:\Users\lukas\source\repos\CteTest\obj\Debug\predeploy.sql
