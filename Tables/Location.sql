@@ -13,3 +13,7 @@
     CONSTRAINT [FK_Location_Region] FOREIGN KEY ([RegionId]) REFERENCES [Region]([Id]),
 	CONSTRAINT [UK_Location_LocationNo] UNIQUE ([LocationNo])
 )
+
+GO
+
+CREATE INDEX [IX_Location_Region] ON [dbo].[Location] ([RegionId] ASC)

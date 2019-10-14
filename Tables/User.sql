@@ -15,3 +15,11 @@
 	CONSTRAINT [FK_User_Role] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[Role]([Id]),
 	CONSTRAINT [FK_User_Department] FOREIGN KEY ([DepartmentId]) REFERENCES [dbo].[Department]([Id])
 )
+
+GO
+
+CREATE INDEX [IX_User_Department] ON [dbo].[User] ([DepartmentId] ASC)
+
+GO
+
+CREATE INDEX [IX_User_Role] ON [dbo].[User] ([RoleId] ASC)
