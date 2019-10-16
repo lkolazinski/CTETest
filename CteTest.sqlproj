@@ -60,6 +60,7 @@
     <Folder Include="Procedures" />
     <Folder Include="UserTypes" />
     <Folder Include="Scripts" />
+    <Folder Include="Functions" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\User.sql" />
@@ -70,6 +71,7 @@
     <Build Include="Tables\Region.sql" />
     <Build Include="Tables\Department.sql" />
     <Build Include="Tables\Logs.sql" />
+    <Build Include="Functions\f_UserGetNextUserNo.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />

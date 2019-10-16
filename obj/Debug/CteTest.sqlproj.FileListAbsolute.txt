@@ -1,5 +1,0 @@
-C:\Users\lukas\source\repos\burnman85\CTETest\bin\Debug\CteTest.dacpac
-C:\Users\lukas\source\repos\burnman85\CTETest\bin\Debug\CteTest.dll
-C:\Users\lukas\source\repos\burnman85\CTETest\bin\Debug\CteTest.pdb
-C:\Users\lukas\source\repos\burnman85\CTETest\obj\Debug\CteTest.dll
-C:\Users\lukas\source\repos\burnman85\CTETest\obj\Debug\CteTest.pdb

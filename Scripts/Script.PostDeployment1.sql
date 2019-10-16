@@ -41,6 +41,7 @@ BEGIN CATCH
 		'Line:[' + CAST(ERROR_LINE() AS VARCHAR) + ']. Error number:[' + CAST(ERROR_NUMBER() AS VARCHAR) + '].', 
 		'E'
 END CATCH
+GO
 --------------------------------------------------------------------------------------
 BEGIN TRY
 	PRINT '[Role]'
@@ -73,6 +74,7 @@ BEGIN CATCH
 		'Line:[' + CAST(ERROR_LINE() AS VARCHAR) + ']. Error number:[' + CAST(ERROR_NUMBER() AS VARCHAR) + '].', 
 		'E'
 END CATCH
+GO
 --------------------------------------------------------------------------------------
 BEGIN TRY
 	PRINT '[Department]'
@@ -104,6 +106,7 @@ BEGIN CATCH
 		'Line:[' + CAST(ERROR_LINE() AS VARCHAR) + ']. Error number:[' + CAST(ERROR_NUMBER() AS VARCHAR) + '].', 
 		'E'
 END CATCH
+GO
 --------------------------------------------------------------------------------------
 BEGIN TRY
 	PRINT '[Location]'
@@ -1097,6 +1100,7 @@ BEGIN CATCH
 		'Line:[' + CAST(ERROR_LINE() AS VARCHAR) + ']. Error number:[' + CAST(ERROR_NUMBER() AS VARCHAR) + '].', 
 		'E'
 END CATCH
+GO
 --------------------------------------------------------------------------------------
 BEGIN TRY
 	
@@ -2403,6 +2407,7 @@ BEGIN CATCH
 		'Line:[' + CAST(ERROR_LINE() AS VARCHAR) + ']. Error number:[' + CAST(ERROR_NUMBER() AS VARCHAR) + '].', 
 		'E'
 END CATCH
+GO
 --------------------------------------------------------------------------------------
 
 SELECT * FROM [dbo].[Logs] ORDER BY 1 DESC

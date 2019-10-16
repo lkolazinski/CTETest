@@ -23,3 +23,7 @@ CREATE INDEX [IX_User_Department] ON [dbo].[User] ([DepartmentId] ASC)
 GO
 
 CREATE INDEX [IX_User_Role] ON [dbo].[User] ([RoleId] ASC)
+GO
+
+CREATE INDEX [IX_User_UserNo] ON [dbo].[User] ([UserNo] ASC)
+GO
