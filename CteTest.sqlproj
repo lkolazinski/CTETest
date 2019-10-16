@@ -72,6 +72,7 @@
     <Build Include="Tables\Department.sql" />
     <Build Include="Tables\Logs.sql" />
     <Build Include="Functions\f_UserGetNextUserNo.sql" />
+    <Build Include="Functions\f_UserGetNextUserNoWithBody.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />
