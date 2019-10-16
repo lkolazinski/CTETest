@@ -3,3 +3,9 @@
 ################################################################################
 
 /bin/Debug
+/obj/Debug/CteTest.dll
+/obj/Debug/CteTest.pdb
+/obj/Debug/CteTest.sqlproj.FileListAbsolute.txt
+/obj/Debug/Model.xml
+/obj/Debug/postdeploy.sql
+/obj/Debug/refactor.xml
