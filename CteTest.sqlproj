@@ -73,6 +73,7 @@
     <Build Include="Tables\Logs.sql" />
     <Build Include="Functions\f_UserGetNextUserNo.sql" />
     <Build Include="Functions\f_UserGetNextUserNoWithBody.sql" />
+    <Build Include="Procedures\User_GetFiltred.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />
