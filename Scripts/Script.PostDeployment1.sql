@@ -2371,6 +2371,8 @@ BEGIN TRY
 		[Name],
 		[RoleId],
 		[DepartmentId],
+		[RegionId],
+		[LocationId],
 		[Login],
 		[Password]
 	)
@@ -2379,7 +2381,9 @@ BEGIN TRY
 		Pom.[Surname],
 		Pom.[Name],
 		r.[Id] AS [RoleId],
-		CASE WHEN r.[Id] > 3 THEN NULL ELSE d.[Id] END AS [DepartmentId],
+		CASE WHEN r.[Id] >= 3 THEN NULL ELSE d.[Id] END AS [DepartmentId],
+		CASE WHEN r.[Id] <= 3 THEN NULL ELSE w.[Id] END AS [RegionId],
+		CASE WHEN r.[Id] <> 3 THEN NULL ELSE l.[Id] END AS [LocationId],
 		Pom.[Login],
 		Pom.[Password]
 	FROM
@@ -2395,6 +2399,8 @@ BEGIN TRY
 	) AS Pom
 	INNER JOIN [dbo].[Role] r ON r.[RoleNo] = Pom.[UserNo] % 6 + 1 
 	INNER JOIN [dbo].[Department] d ON d.[DepartmentNo] = Pom.[UserNo] % 6 + 1 
+	INNER JOIN [dbo].[Region] w ON w.[RegionNo] = Pom.[UserNo] % 6 + 1
+	INNER JOIN [dbo].[Location] l ON l.[LocationNo] = Pom.[UserNo] % 900 + 1
 	
 	INSERT INTO [dbo].[Logs] ([Message], [LogType])
 	SELECT '[Users] rows inserted: [' + CAST(@@ROWCOUNT AS VARCHAR) + ']', 'I'

@@ -31,13 +31,23 @@ BEGIN
 		
 		u.[DepartmentId],
 		d.[DepartmentNo],
-		d.[Name] AS [DepartmentName]
+		d.[Name] AS [DepartmentName],
+
+		u.[RegionId],
+		s.[Name] AS [RegionName],
+		s.[RegionNo] AS [RegionNo],
+
+		u.[LocationId],
+		l.[Name] AS [LocationName],
+		l.[LocationNo]
 		
 	FROM [dbo].[User] u
 	LEFT JOIN @RoleIdTable t ON t.[UniqueId] = u.[RoleId]
 	LEFT JOIN [dbo].[Role] r ON r.[Id] = t.[UniqueId]
 	LEFT JOIN @DepartmentIdTable w ON w.[UniqueId] = u.[DepartmentId]
 	LEFT JOIN [dbo].[Department] d ON d.[Id] = u.[DepartmentId]
+	LEFT JOIN [dbo].[Region] s ON s.[Id] = u.[RegionId]
+	LEFT JOIN [dbo].[Location] l ON l.[Id] = u.[LocationId]
 	WHERE 
 		(@RoleIsDempty = 1 OR t.[UniqueId] IS NOT NULL)
 		OR
