@@ -61,6 +61,7 @@
     <Folder Include="UserTypes" />
     <Folder Include="Scripts" />
     <Folder Include="Functions" />
+    <Folder Include="Scripts\Imports" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\User.sql" />
@@ -77,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />
+    <None Include="Scripts\Imports\ImportUsersLocations.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CteTest.refactorlog" />

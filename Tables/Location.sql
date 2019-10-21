@@ -17,3 +17,4 @@
 GO
 
 CREATE INDEX [IX_Location_Region] ON [dbo].[Location] ([RegionId] ASC)
+GO
