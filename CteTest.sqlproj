@@ -75,6 +75,8 @@
     <Build Include="Functions\f_UserGetNextUserNo.sql" />
     <Build Include="Functions\f_UserGetNextUserNoWithBody.sql" />
     <Build Include="Procedures\User_GetFiltred.sql" />
+    <Build Include="Functions\f_GetUserCountForLocationId.sql" />
+    <Build Include="Functions\f_GetLocationCountForUserId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />
