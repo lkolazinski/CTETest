@@ -26,7 +26,6 @@ DROP TABLE dbo.[Logs]
 */
 
 --repo: https://github.com/burnman85/CTETest
---pass: Burnman1234
 
 
 --------------------------------------------------------------------------------------
