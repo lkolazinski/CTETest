@@ -25,6 +25,10 @@ DROP TABLE dbo.[Department]
 DROP TABLE dbo.[Logs]
 */
 
+--repo: https://github.com/burnman85/CTETest
+--pass: Burnman1234
+
+
 --------------------------------------------------------------------------------------
 BEGIN TRY
 	PRINT '[Department]'
