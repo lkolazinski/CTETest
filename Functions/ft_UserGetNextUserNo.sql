@@ -1,4 +1,4 @@
-﻿CREATE FUNCTION [dbo].[f_UserGetNextUserNo]
+﻿CREATE FUNCTION [dbo].[ft_UserGetNextUserNo]
 (
 	 @NumberOfRows INT
 )

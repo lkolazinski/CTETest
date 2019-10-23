@@ -72,11 +72,11 @@
     <Build Include="Tables\Region.sql" />
     <Build Include="Tables\Department.sql" />
     <Build Include="Tables\Logs.sql" />
-    <Build Include="Functions\f_UserGetNextUserNo.sql" />
-    <Build Include="Functions\f_UserGetNextUserNoWithBody.sql" />
+    <Build Include="Functions\ft_UserGetNextUserNo.sql" />
+    <Build Include="Functions\ft_UserGetNextUserNoWithBody.sql" />
     <Build Include="Procedures\User_GetFiltred.sql" />
-    <Build Include="Functions\f_GetUserCountForLocationId.sql" />
     <Build Include="Functions\f_GetLocationCountForUserId.sql" />
+    <Build Include="Functions\f_GetUsersCountForLocationId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />
