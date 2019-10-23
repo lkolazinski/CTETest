@@ -40,7 +40,19 @@
 
 	--DELETE FROM [dbo].[UserLocation] WHERE ID < 20000
 
-	;WITH ByLocation
+	;WITH Admins
+	AS
+	(
+		SELECT
+			u.[Id] AS [UserId],
+			l.[Id] AS [LocationId]
+		FROM [dbo].[User] u
+		INNER JOIN [dbo].[Role] r ON r.[Id] = u.[RoleId]
+			AND r.[RoleNo] = 1
+		INNER JOIN [dbo].[Location] l ON 1 = 1
+	)
+	,
+	ByLocation
 	AS
 	(
 		SELECT
@@ -75,6 +87,10 @@
 	(
 		SELECT 
 		*
+		FROM Admins
+		UNION
+		SELECT 
+		*
 		FROM ByLocation
 		UNION
 		SELECT 
@@ -98,7 +114,8 @@
 	WHEN NOT MATCHED THEN
 		INSERT ([UserId], [LocationId])
 		VALUES (SOURCE.[MyUserId], SOURCE.[MyLocationId])
-	OUTPUT deleted.*, $action, inserted.* ;
+	--OUTPUT deleted.*, $action, inserted.* 
+	;
 
 	COMMIT TRANSACTION
 

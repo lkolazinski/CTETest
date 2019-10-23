@@ -11,14 +11,16 @@ Post-Deployment Script Template
 */
 
 /* DROP ALL SQL OBJECTS
+DROP FUNCTION dbo.[f_GetLocationCountForUserId]
+DROP FUNCTION dbo.[f_GetUserCountForLocationId]
 DROP FUNCTION dbo.[f_UserGetNextUserNoWithBody]
 DROP FUNCTION dbo.[f_UserGetNextUserNo]
 DROP PROCEDURE dbo.[User_GetFiltred]
 DROP TABLE dbo.[UserLocation]
 DROP TABLE dbo.[User]
 DROP TABLE dbo.[Role]
-DROP TABLE dbo.[Region]
 DROP TABLE dbo.[Location]
+DROP TABLE dbo.[Region]
 DROP TABLE dbo.[Department]
 DROP TABLE dbo.[Logs]
 */
@@ -1078,7 +1080,947 @@ BEGIN TRY
 			SELECT 'Żuromin', 'żuromiński', 'mazowieckie', '1118', '8901', '796' UNION
 			SELECT 'Żychlin', 'kutnowski', 'łódzkie', '868', '8220', '947' UNION
 			SELECT 'Żyrardów', 'żyrardowski', 'mazowieckie', '1435', '39992', '2787' UNION
-			SELECT 'Żywiec', 'żywiecki', 'śląskie', '5054', '31388', '621'
+			SELECT 'Żywiec', 'żywiecki', 'śląskie', '5054', '31388', '621' UNION
+			SELECT 'Nowy Aleksandrów Kujawski', 'aleksandrowski', 'kujawsko-pomorskie', '723', '12220', '1690' UNION
+			SELECT 'Nowy Aleksandrów Łódzki', 'zgierski', 'łódzkie', '1382', '21682', '1569' UNION
+			SELECT 'Nowy Alwernia', 'chrzanowski', 'małopolskie', '888', '3370', '380' UNION
+			SELECT 'Nowy Andrychów', 'wadowicki', 'małopolskie', '1033', '20260', '1961' UNION
+			SELECT 'Nowy Annopol', 'kraśnicki', 'lubelskie', '773', '2528', '327' UNION
+			SELECT 'Nowy Augustów', 'augustowski', 'podlaskie', '8090', '30242', '374' UNION
+			SELECT 'Nowy Babimost', 'zielonogórski', 'lubuskie', '365', '3927', '1076' UNION
+			SELECT 'Nowy Baborów', 'głubczycki', 'opolskie', '1186', '2920', '246' UNION
+			SELECT 'Nowy Baranów Sandomierski', 'tarnobrzeski', 'podkarpackie', '915', '1463', '160' UNION
+			SELECT 'Nowy Barcin', 'żniński', 'kujawsko-pomorskie', '370', '7468', '2018' UNION
+			SELECT 'Nowy Barczewo', 'olsztyński', 'warmińsko-mazurskie', '458', '7535', '1645' UNION
+			SELECT 'Nowy Bardo', 'ząbkowicki', 'dolnośląskie', '471', '2563', '544' UNION
+			SELECT 'Nowy Barlinek', 'myśliborski', 'zachodniopomorskie', '1755', '13803', '786' UNION
+			SELECT 'Nowy Bartoszyce', 'bartoszycki', 'warmińsko-mazurskie', '1179', '23609', '2002' UNION
+			SELECT 'Nowy Barwice', 'szczecinecki', 'zachodniopomorskie', '752', '3723', '495' UNION
+			SELECT 'Nowy Bełchatów', 'bełchatowski', 'łódzkie', '3464', '57432', '1658' UNION
+			SELECT 'Nowy Bełżyce', 'lubelski', 'lubelskie', '2346', '6551', '279' UNION
+			SELECT 'Nowy Będzin', 'będziński', 'śląskie', '3737', '56804', '1520' UNION
+			SELECT 'Nowy Biała', 'prudnicki', 'opolskie', '1472', '2443', '166' UNION
+			SELECT 'Nowy Biała Piska', 'piski', 'warmińsko-mazurskie', '324', '4030', '1244' UNION
+			SELECT 'Nowy Biała Podlaska', 'Biała Podlaska[a]', 'lubelskie', '4940', '57352', '1161' UNION
+			SELECT 'Nowy Biała Rawska', 'rawski', 'łódzkie', '953', '3197', '335' UNION
+			SELECT 'Nowy Białobrzegi', 'białobrzeski', 'mazowieckie', '751', '6980', '929' UNION
+			SELECT 'Nowy Białogard', 'białogardzki', 'zachodniopomorskie', '2573', '24339', '946' UNION
+			SELECT 'Nowy Biały Bór', 'szczecinecki', 'zachodniopomorskie', '1282', '2199', '172' UNION
+			SELECT 'Nowy Białystok', 'Białystok[a]', 'podlaskie', '10213', '297459', '2913' UNION
+			SELECT 'Nowy Biecz', 'gorlicki', 'małopolskie', '1771', '4599', '260' UNION
+			SELECT 'Nowy Bielawa', 'dzierżoniowski', 'dolnośląskie', '3621', '30055', '830' UNION
+			SELECT 'Nowy Bielsk Podlaski', 'bielski', 'podlaskie', '2701', '25370', '939' UNION
+			SELECT 'Nowy Bielsko-Biała', 'Bielsko-Biała[a]', 'śląskie', '12451', '171259', '1375' UNION
+			SELECT 'Nowy Bieruń', 'bieruńsko-lędziński', 'śląskie', '4049', '19605', '484' UNION
+			SELECT 'Nowy Bierutów', 'oleśnicki', 'dolnośląskie', '836', '4871', '583' UNION
+			SELECT 'Nowy Bieżuń', 'żuromiński', 'mazowieckie', '1207', '1856', '154' UNION
+			SELECT 'Nowy Biłgoraj', 'biłgorajski', 'lubelskie', '2110', '26391', '1251' UNION
+			SELECT 'Nowy Biskupiec', 'olsztyński', 'warmińsko-mazurskie', '500', '10602', '2120' UNION
+			SELECT 'Nowy Bisztynek', 'bartoszycki', 'warmińsko-mazurskie', '216', '2365', '1095' UNION
+			SELECT 'Nowy Blachownia', 'częstochowski', 'śląskie', '3666', '9594', '262' UNION
+			SELECT 'Nowy Błaszki', 'sieradzki', 'łódzkie', '162', '2122', '1310' UNION
+			SELECT 'Nowy Błażowa', 'rzeszowski', 'podkarpackie', '423', '2151', '509' UNION
+			SELECT 'Nowy Błonie', 'warszawski zachodni', 'mazowieckie', '909', '12327', '1356' UNION
+			SELECT 'Nowy Bobolice', 'koszaliński', 'zachodniopomorskie', '477', '4018', '842' UNION
+			SELECT 'Nowy Bobowa', 'gorlicki', 'małopolskie', '718', '3136', '437' UNION
+			SELECT 'Nowy Bochnia', 'bocheński', 'małopolskie', '2987', '29922', '1002' UNION
+			SELECT 'Nowy Bodzentyn', 'kielecki', 'świętokrzyskie', '865', '2240', '259' UNION
+			SELECT 'Nowy Bogatynia', 'zgorzelecki', 'dolnośląskie', '5988', '17559', '293' UNION
+			SELECT 'Nowy Boguchwała', 'rzeszowski', 'podkarpackie', '911', '6117', '671' UNION
+			SELECT 'Nowy Boguszów-Gorce', 'wałbrzyski', 'dolnośląskie', '2702', '15444', '572' UNION
+			SELECT 'Nowy Bojanowo', 'rawicki', 'wielkopolskie', '234', '2923', '1249' UNION
+			SELECT 'Nowy Bolesławiec', 'bolesławiecki', 'dolnośląskie', '2357', '38935', '1652' UNION
+			SELECT 'Nowy Bolków', 'jaworski', 'dolnośląskie', '768', '5001', '651' UNION
+			SELECT 'Nowy Borek Wielkopolski', 'gostyński', 'wielkopolskie', '629', '2526', '402' UNION
+			SELECT 'Nowy Borne Sulinowo', 'szczecinecki', 'zachodniopomorskie', '1815', '5090', '280' UNION
+			SELECT 'Nowy Braniewo', 'braniewski', 'warmińsko-mazurskie', '1241', '17071', '1376' UNION
+			SELECT 'Nowy Brańsk', 'bielski', 'podlaskie', '3243', '3774', '116' UNION
+			SELECT 'Nowy Brodnica', 'brodnicki', 'kujawsko-pomorskie', '2315', '28774', '1243' UNION
+			SELECT 'Nowy Brok', 'ostrowski', 'mazowieckie', '2806', '1940', '69' UNION
+			SELECT 'Nowy Brusy', 'chojnicki', 'pomorskie', '520', '5232', '1006' UNION
+			SELECT 'Nowy Brwinów', 'pruszkowski', 'mazowieckie', '1010', '13531', '1340' UNION
+			SELECT 'Nowy Brzeg', 'brzeski', 'opolskie', '1461', '35930', '2459' UNION
+			SELECT 'Nowy Brzeg Dolny', 'wołowski', 'dolnośląskie', '1720', '12492', '726' UNION
+			SELECT 'Nowy Brzesko', 'brzeski', 'małopolskie', '1192', '16825', '1411' UNION
+			SELECT 'Nowy Brzeszcze', 'oświęcimski', 'małopolskie', '1904', '11226', '590' UNION
+			SELECT 'Nowy Brześć Kujawski', 'włocławski', 'kujawsko-pomorskie', '704', '4659', '662' UNION
+			SELECT 'Nowy Brzeziny', 'brzeziński', 'łódzkie', '2158', '12547', '581' UNION
+			SELECT 'Nowy Brzostek', 'dębicki', 'podkarpackie', '876', '2742', '313' UNION
+			SELECT 'Nowy Brzozów', 'brzozowski', 'podkarpackie', '1146', '7455', '651' UNION
+			SELECT 'Nowy Buk', 'poznański', 'wielkopolskie', '296', '6064', '2049' UNION
+			SELECT 'Nowy Bukowno', 'olkuski', 'małopolskie', '6459', '10197', '158' UNION
+			SELECT 'Nowy Busko-Zdrój', 'buski', 'świętokrzyskie', '1228', '15952', '1299' UNION
+			SELECT 'Nowy Bychawa', 'lubelski', 'lubelskie', '669', '4942', '739' UNION
+			SELECT 'Nowy Byczyna', 'kluczborski', 'opolskie', '579', '3609', '623' UNION
+			SELECT 'Nowy Bydgoszcz', 'Bydgoszcz[a]', 'kujawsko-pomorskie', '17598', '350178', '1990' UNION
+			SELECT 'Nowy Bystrzyca Kłodzka', 'kłodzki', 'dolnośląskie', '1074', '10189', '949' UNION
+			SELECT 'Nowy Bytom', 'Bytom[a]', 'śląskie', '6944', '166795', '2402' UNION
+			SELECT 'Nowy Bytom Odrzański', 'nowosolski', 'lubuskie', '230', '4331', '1883' UNION
+			SELECT 'Nowy Bytów', 'bytowski', 'pomorskie', '872', '16954', '1944' UNION
+			SELECT 'Nowy Cedynia', 'gryfiński', 'zachodniopomorskie', '167', '1573', '942' UNION
+			SELECT 'Nowy Chełm', 'Chełm[a]', 'lubelskie', '3528', '62670', '1776' UNION
+			SELECT 'Nowy Chełmek', 'oświęcimski', 'małopolskie', '827', '9061', '1096' UNION
+			SELECT 'Nowy Chełmno', 'chełmiński', 'kujawsko-pomorskie', '1356', '19720', '1454' UNION
+			SELECT 'Nowy Chełmża', 'toruński', 'kujawsko-pomorskie', '784', '14532', '1854' UNION
+			SELECT 'Nowy Chęciny', 'kielecki', 'świętokrzyskie', '1413', '4445', '315' UNION
+			SELECT 'Nowy Chmielnik', 'kielecki', 'świętokrzyskie', '780', '3703', '475' UNION
+			SELECT 'Nowy Chocianów', 'polkowicki', 'dolnośląskie', '900', '7911', '879' UNION
+			SELECT 'Nowy Chociwel', 'stargardzki', 'zachodniopomorskie', '367', '3209', '874' UNION
+			SELECT 'Nowy Chocz', 'pleszewski', 'wielkopolskie', '688', '1777', '258' UNION
+			SELECT 'Nowy Chodecz', 'włocławski', 'kujawsko-pomorskie', '139', '1899', '1366' UNION
+			SELECT 'Nowy Chodzież', 'chodzieski', 'wielkopolskie', '1277', '18684', '1463' UNION
+			SELECT 'Nowy Chojna', 'gryfiński', 'zachodniopomorskie', '1258', '7390', '587' UNION
+			SELECT 'Nowy Chojnice', 'chojnicki', 'pomorskie', '2104', '39904', '1897' UNION
+			SELECT 'Nowy Chojnów', 'legnicki', 'dolnośląskie', '532', '13426', '2524' UNION
+			SELECT 'Nowy Choroszcz', 'białostocki', 'podlaskie', '1679', '5867', '349' UNION
+			SELECT 'Nowy Chorzele', 'przasnyski', 'mazowieckie', '1751', '3078', '176' UNION
+			SELECT 'Nowy Chorzów', 'Chorzów[a]', 'śląskie', '3324', '108434', '3262' UNION
+			SELECT 'Nowy Choszczno', 'choszczeński', 'zachodniopomorskie', '958', '15248', '1592' UNION
+			SELECT 'Nowy Chrzanów', 'chrzanowski', 'małopolskie', '3832', '36945', '964' UNION
+			SELECT 'Nowy Ciechanowiec', 'wysokomazowiecki', 'podlaskie', '1953', '4639', '238' UNION
+			SELECT 'Nowy Ciechanów', 'ciechanowski', 'mazowieckie', '3278', '44209', '1349' UNION
+			SELECT 'Nowy Ciechocinek', 'aleksandrowski', 'kujawsko-pomorskie', '1526', '10596', '694' UNION
+			SELECT 'Nowy Cieszanów', 'lubaczowski', 'podkarpackie', '1506', '1930', '128' UNION
+			SELECT 'Nowy Cieszyn', 'cieszyński', 'śląskie', '2861', '34613', '1210' UNION
+			SELECT 'Nowy Ciężkowice', 'tarnowski', 'małopolskie', '999', '2469', '247' UNION
+			SELECT 'Nowy Cybinka', 'słubicki', 'lubuskie', '529', '2756', '521' UNION
+			SELECT 'Nowy Czaplinek', 'drawski', 'zachodniopomorskie', '1362', '7124', '523' UNION
+			SELECT 'Nowy Czarna Białostocka', 'białostocki', 'podlaskie', '1428', '9338', '654' UNION
+			SELECT 'Nowy Czarna Woda', 'starogardzki', 'pomorskie', '994', '2805', '282' UNION
+			SELECT 'Nowy Czarne', 'człuchowski', 'pomorskie', '4643', '5952', '128' UNION
+			SELECT 'Nowy Czarnków', 'czarnkowsko-trzcianecki', 'wielkopolskie', '1017', '10735', '1056' UNION
+			SELECT 'Nowy Czchów', 'brzeski', 'małopolskie', '1409', '2344', '166' UNION
+			SELECT 'Nowy Czechowice-Dziedzice', 'bielski', 'śląskie', '3291', '35919', '1091' UNION
+			SELECT 'Nowy Czeladź', 'będziński', 'śląskie', '1638', '31677', '1934' UNION
+			SELECT 'Nowy Czempiń', 'kościański', 'wielkopolskie', '332', '5295', '1595' UNION
+			SELECT 'Nowy Czerniejewo', 'gnieźnieński', 'wielkopolskie', '1019', '2663', '261' UNION
+			SELECT 'Nowy Czersk', 'chojnicki', 'pomorskie', '973', '9912', '1019' UNION
+			SELECT 'Nowy Czerwieńsk', 'zielonogórski', 'lubuskie', '936', '4063', '434' UNION
+			SELECT 'Nowy Czerwionka-Leszczyny', 'rybnicki', 'śląskie', '3763', '28266', '751' UNION
+			SELECT 'Nowy Częstochowa', 'Częstochowa[a]', 'śląskie', '15971', '222292', '1392' UNION
+			SELECT 'Nowy Człopa', 'wałecki', 'zachodniopomorskie', '627', '2326', '371' UNION
+			SELECT 'Nowy Człuchów', 'człuchowski', 'pomorskie', '1278', '13708', '1073' UNION
+			SELECT 'Nowy Czyżew', 'wysokomazowiecki', 'podlaskie', '523', '2641', '505' UNION
+			SELECT 'Nowy Ćmielów', 'ostrowiecki', 'świętokrzyskie', '1334', '3024', '227' UNION
+			SELECT 'Nowy Daleszyce', 'kielecki', 'świętokrzyskie', '1550', '2907', '188' UNION
+			SELECT 'Nowy Darłowo', 'sławieński', 'zachodniopomorskie', '2021', '13759', '681' UNION
+			SELECT 'Nowy Dąbie', 'kolski', 'wielkopolskie', '880', '2002', '228' UNION
+			SELECT 'Nowy Dąbrowa Białostocka', 'sokólski', 'podlaskie', '2264', '5553', '245' UNION
+			SELECT 'Nowy Dąbrowa Górnicza', 'Dąbrowa Górnicza[a]', 'śląskie', '18873', '120259', '637' UNION
+			SELECT 'Nowy Dąbrowa Tarnowska', 'dąbrowski', 'małopolskie', '2307', '11906', '516' UNION
+			SELECT 'Nowy Debrzno', 'człuchowski', 'pomorskie', '751', '5102', '679' UNION
+			SELECT 'Nowy Dębica', 'dębicki', 'podkarpackie', '3383', '45817', '1354' UNION
+			SELECT 'Nowy Dęblin', 'rycki', 'lubelskie', '3833', '16149', '421' UNION
+			SELECT 'Nowy Dębno', 'myśliborski', 'zachodniopomorskie', '1951', '13843', '710' UNION
+			SELECT 'Nowy Dobczyce', 'myślenicki', 'małopolskie', '1297', '6434', '496' UNION
+			SELECT 'Nowy Dobiegniew', 'strzelecko-drezdenecki', 'lubuskie', '569', '3088', '543' UNION
+			SELECT 'Nowy Dobra', 'łobeski', 'zachodniopomorskie', '237', '2326', '981' UNION
+			SELECT 'Nowy Dobra', 'turecki', 'wielkopolskie', '184', '1387', '754' UNION
+			SELECT 'Nowy Dobre Miasto', 'olsztyński', 'warmińsko-mazurskie', '486', '10239', '2107' UNION
+			SELECT 'Nowy Dobrodzień', 'oleski', 'opolskie', '1953', '3722', '191' UNION
+			SELECT 'Nowy Dobrzany', 'stargardzki', 'zachodniopomorskie', '534', '2264', '424' UNION
+			SELECT 'Nowy Dobrzyca', 'pleszewski', 'wielkopolskie', '1970', '3128', '159' UNION
+			SELECT 'Nowy Dobrzyń nad Wisłą', 'lipnowski', 'kujawsko-pomorskie', '541', '2139', '395' UNION
+			SELECT 'Nowy Dolsk', 'śremski', 'wielkopolskie', '620', '1560', '252' UNION
+			SELECT 'Nowy Drawno', 'choszczeński', 'zachodniopomorskie', '503', '2290', '455' UNION
+			SELECT 'Nowy Drawsko Pomorskie', 'drawski', 'zachodniopomorskie', '2233', '11657', '522' UNION
+			SELECT 'Nowy Drezdenko', 'strzelecko-drezdenecki', 'lubuskie', '1072', '10182', '950' UNION
+			SELECT 'Nowy Drobin', 'płocki', 'mazowieckie', '965', '2889', '299' UNION
+			SELECT 'Nowy Drohiczyn', 'siemiatycki', 'podlaskie', '1569', '1987', '127' UNION
+			SELECT 'Nowy Drzewica', 'opoczyński', 'łódzkie', '481', '3844', '799' UNION
+			SELECT 'Nowy Dukla', 'krośnieński', 'podkarpackie', '548', '2083', '380' UNION
+			SELECT 'Nowy Duszniki-Zdrój', 'kłodzki', 'dolnośląskie', '2228', '4629', '208' UNION
+			SELECT 'Nowy Dynów', 'rzeszowski', 'podkarpackie', '2455', '6138', '250' UNION
+			SELECT 'Nowy Działdowo', 'działdowski', 'warmińsko-mazurskie', '1147', '21275', '1855' UNION
+			SELECT 'Nowy Działoszyce', 'pińczowski', 'świętokrzyskie', '192', '908', '473' UNION
+			SELECT 'Nowy Działoszyn', 'pajęczański', 'łódzkie', '494', '5922', '1199' UNION
+			SELECT 'Nowy Dzierzgoń', 'sztumski', 'pomorskie', '390', '5367', '1376' UNION
+			SELECT 'Nowy Dzierżoniów', 'dzierżoniowski', 'dolnośląskie', '2007', '33344', '1661' UNION
+			SELECT 'Nowy Dziwnów', 'kamieński', 'zachodniopomorskie', '652', '2698', '414' UNION
+			SELECT 'Nowy Elbląg', 'Elbląg[a]', 'warmińsko-mazurskie', '7982', '120142', '1505' UNION
+			SELECT 'Nowy Ełk', 'ełcki', 'warmińsko-mazurskie', '2105', '61928', '2942' UNION
+			SELECT 'Nowy Frampol', 'biłgorajski', 'lubelskie', '467', '1437', '308' UNION
+			SELECT 'Nowy Frombork', 'braniewski', 'warmińsko-mazurskie', '759', '2355', '310' UNION
+			SELECT 'Nowy Garwolin', 'garwoliński', 'mazowieckie', '2208', '17494', '792' UNION
+			SELECT 'Nowy Gąbin', 'płocki', 'mazowieckie', '2795', '4114', '147' UNION
+			SELECT 'Nowy Gdańsk', 'Gdańsk[a]', 'pomorskie', '26196', '466631', '1781' UNION
+			SELECT 'Nowy Gdynia', 'Gdynia[a]', 'pomorskie', '13514', '246309', '1823' UNION
+			SELECT 'Nowy Giżycko', 'giżycki', 'warmińsko-mazurskie', '1372', '29396', '2143' UNION
+			SELECT 'Nowy Glinojeck', 'ciechanowski', 'mazowieckie', '737', '3017', '409' UNION
+			SELECT 'Nowy Gliwice', 'Gliwice[a]', 'śląskie', '13388', '179806', '1343' UNION
+			SELECT 'Nowy Głogów', 'głogowski', 'dolnośląskie', '3511', '67615', '1926' UNION
+			SELECT 'Nowy Głogów Małopolski', 'rzeszowski', 'podkarpackie', '1371', '6568', '479' UNION
+			SELECT 'Nowy Głogówek', 'prudnicki', 'opolskie', '2206', '5604', '254' UNION
+			SELECT 'Nowy Głowno', 'zgierski', 'łódzkie', '1984', '14291', '720' UNION
+			SELECT 'Nowy Głubczyce', 'głubczycki', 'opolskie', '1254', '12596', '1004' UNION
+			SELECT 'Nowy Głuchołazy', 'nyski', 'opolskie', '683', '13585', '1989' UNION
+			SELECT 'Nowy Głuszyca', 'wałbrzyski', 'dolnośląskie', '1621', '6381', '394' UNION
+			SELECT 'Nowy Gniew', 'tczewski', 'pomorskie', '604', '6761', '1119' UNION
+			SELECT 'Nowy Gniewkowo', 'inowrocławski', 'kujawsko-pomorskie', '918', '7141', '778' UNION
+			SELECT 'Nowy Gniezno', 'gnieźnieński', 'wielkopolskie', '4060', '68479', '1687' UNION
+			SELECT 'Nowy Gogolin', 'krapkowicki', 'opolskie', '2035', '6661', '327' UNION
+			SELECT 'Nowy Golczewo', 'kamieński', 'zachodniopomorskie', '742', '2673', '360' UNION
+			SELECT 'Nowy Goleniów', 'goleniowski', 'zachodniopomorskie', '1178', '22403', '1902' UNION
+			SELECT 'Nowy Golina', 'koniński', 'wielkopolskie', '352', '4503', '1279' UNION
+			SELECT 'Nowy Golub-Dobrzyń', 'golubsko-dobrzyński', 'kujawsko-pomorskie', '750', '12630', '1684' UNION
+			SELECT 'Nowy Gołańcz', 'wągrowiecki', 'wielkopolskie', '1264', '3336', '264' UNION
+			SELECT 'Nowy Gołdap', 'gołdapski', 'warmińsko-mazurskie', '1720', '13735', '799' UNION
+			SELECT 'Nowy Goniądz', 'moniecki', 'podlaskie', '428', '1813', '424' UNION
+			SELECT 'Nowy Gorlice', 'gorlicki', 'małopolskie', '2353', '27597', '1173' UNION
+			SELECT 'Nowy Gorzów Śląski', 'oleski', 'opolskie', '1854', '2452', '132' UNION
+			SELECT 'Nowy Gorzów Wielkopolski', 'Gorzów Wielkopolski[a]', 'lubuskie', '8572', '123921', '1446' UNION
+			SELECT 'Nowy Gostynin', 'gostyniński', 'mazowieckie', '3240', '18647', '576' UNION
+			SELECT 'Nowy Gostyń', 'gostyński', 'wielkopolskie', '1109', '20192', '1821' UNION
+			SELECT 'Nowy Gościno', 'kołobrzeski', 'zachodniopomorskie', '570', '2417', '424' UNION
+			SELECT 'Nowy Gozdnica', 'żagański', 'lubuskie', '2392', '3061', '128' UNION
+			SELECT 'Nowy Góra', 'górowski', 'dolnośląskie', '1365', '11859', '869' UNION
+			SELECT 'Nowy Góra Kalwaria', 'piaseczyński', 'mazowieckie', '1367', '12009', '878' UNION
+			SELECT 'Nowy Górowo Iławeckie', 'bartoszycki', 'warmińsko-mazurskie', '332', '3974', '1197' UNION
+			SELECT 'Nowy Górzno', 'brodnicki', 'kujawsko-pomorskie', '343', '1370', '399' UNION
+			SELECT 'Nowy Grabów nad Prosną', 'ostrzeszowski', 'wielkopolskie', '258', '1940', '752' UNION
+			SELECT 'Nowy Grajewo', 'grajewski', 'podlaskie', '1894', '21935', '1158' UNION
+			SELECT 'Nowy Grodków', 'brzeski', 'opolskie', '988', '8667', '877' UNION
+			SELECT 'Nowy Grodzisk Mazowiecki', 'grodziski', 'mazowieckie', '1319', '31505', '2389' UNION
+			SELECT 'Nowy Grodzisk Wielkopolski', 'grodziski', 'wielkopolskie', '1821', '14633', '804' UNION
+			SELECT 'Nowy Grójec', 'grójecki', 'mazowieckie', '857', '16707', '1949' UNION
+			SELECT 'Nowy Grudziądz', 'Grudziądz[a]', 'kujawsko-pomorskie', '5776', '95045', '1646' UNION
+			SELECT 'Nowy Grybów', 'nowosądecki', 'małopolskie', '1695', '6038', '356' UNION
+			SELECT 'Nowy Gryfice', 'gryficki', 'zachodniopomorskie', '1240', '16527', '1333' UNION
+			SELECT 'Nowy Gryfino', 'gryfiński', 'zachodniopomorskie', '1181', '21274', '1801' UNION
+			SELECT 'Nowy Gryfów Śląski', 'lwówecki', 'dolnośląskie', '663', '6641', '1002' UNION
+			SELECT 'Nowy Gubin', 'krośnieński', 'lubuskie', '2068', '16687', '807' UNION
+			SELECT 'Nowy Hajnówka', 'hajnowski', 'podlaskie', '2129', '20690', '972' UNION
+			SELECT 'Nowy Halinów', 'miński', 'mazowieckie', '284', '3739', '1317' UNION
+			SELECT 'Nowy Hel', 'pucki', 'pomorskie', '2295', '3285', '143' UNION
+			SELECT 'Nowy Hrubieszów', 'hrubieszowski', 'lubelskie', '3303', '17735', '537' UNION
+			SELECT 'Nowy Iława', 'iławski', 'warmińsko-mazurskie', '2188', '33250', '1520' UNION
+			SELECT 'Nowy Iłowa', 'żagański', 'lubuskie', '918', '3912', '426' UNION
+			SELECT 'Nowy Iłża', 'radomski', 'mazowieckie', '1583', '4775', '302' UNION
+			SELECT 'Nowy Imielin', 'bieruńsko-lędziński', 'śląskie', '2799', '9153', '327' UNION
+			SELECT 'Nowy Inowrocław', 'inowrocławski', 'kujawsko-pomorskie', '3042', '73114', '2403' UNION
+			SELECT 'Nowy Ińsko', 'stargardzki', 'zachodniopomorskie', '748', '1929', '258' UNION
+			SELECT 'Nowy Iwonicz-Zdrój', 'krośnieński', 'podkarpackie', '589', '1793', '304' UNION
+			SELECT 'Nowy Izbica Kujawska', 'włocławski', 'kujawsko-pomorskie', '224', '2631', '1175' UNION
+			SELECT 'Nowy Jabłonowo Pomorskie', 'brodnicki', 'kujawsko-pomorskie', '335', '3758', '1122' UNION
+			SELECT 'Nowy Janikowo', 'inowrocławski', 'kujawsko-pomorskie', '951', '8758', '921' UNION
+			SELECT 'Nowy Janowiec Wielkopolski', 'żniński', 'kujawsko-pomorskie', '304', '3966', '1305' UNION
+			SELECT 'Nowy Janów Lubelski', 'janowski', 'lubelskie', '1480', '11940', '807' UNION
+			SELECT 'Nowy Jaraczewo', 'jarociński', 'wielkopolskie', '1007', '1420', '141' UNION
+			SELECT 'Nowy Jarocin', 'jarociński', 'wielkopolskie', '1638', '26256', '1603' UNION
+			SELECT 'Nowy Jarosław', 'jarosławski', 'podkarpackie', '3461', '37690', '1089' UNION
+			SELECT 'Nowy Jasień', 'żarski', 'lubuskie', '479', '4328', '904' UNION
+			SELECT 'Nowy Jasło', 'jasielski', 'podkarpackie', '3652', '35192', '964' UNION
+			SELECT 'Nowy Jastarnia', 'pucki', 'pomorskie', '506', '2710', '536' UNION
+			SELECT 'Nowy Jastrowie', 'złotowski', 'wielkopolskie', '7230', '8598', '119' UNION
+			SELECT 'Nowy Jastrzębie-Zdrój', 'Jastrzębie-Zdrój[a]', 'śląskie', '8533', '89128', '1045' UNION
+			SELECT 'Nowy Jawor', 'jaworski', 'dolnośląskie', '1880', '23056', '1226' UNION
+			SELECT 'Nowy Jaworzno', 'Jaworzno[a]', 'śląskie', '15259', '91563', '600' UNION
+			SELECT 'Nowy Jaworzyna Śląska', 'świdnicki', 'dolnośląskie', '434', '5141', '1185' UNION
+			SELECT 'Nowy Jedlicze', 'krośnieński', 'podkarpackie', '1060', '5759', '543' UNION
+			SELECT 'Nowy Jedlina-Zdrój', 'wałbrzyski', 'dolnośląskie', '1745', '4851', '278' UNION
+			SELECT 'Nowy Jedwabne', 'łomżyński', 'podlaskie', '454', '1632', '359' UNION
+			SELECT 'Nowy Jelcz-Laskowice', 'oławski', 'dolnośląskie', '1706', '15792', '926' UNION
+			SELECT 'Nowy Jelenia Góra', 'Jelenia Góra[a]', 'dolnośląskie', '10922', '79480', '728' UNION
+			SELECT 'Nowy Jeziorany', 'olsztyński', 'warmińsko-mazurskie', '341', '3225', '946' UNION
+			SELECT 'Nowy Jędrzejów', 'jędrzejowski', 'świętokrzyskie', '1137', '15149', '1332' UNION
+			SELECT 'Nowy Jordanów', 'suski', 'małopolskie', '2103', '5373', '255' UNION
+			SELECT 'Nowy Józefów', 'biłgorajski', 'lubelskie', '500', '2492', '498' UNION
+			SELECT 'Nowy Józefów', 'otwocki', 'mazowieckie', '2391', '20605', '862' UNION
+			SELECT 'Nowy Józefów nad Wisłą', 'opolski', 'lubelskie', '365', '923', '253' UNION
+			SELECT 'Nowy Jutrosin', 'rawicki', 'wielkopolskie', '162', '1967', '1214' UNION
+			SELECT 'Nowy Kalety', 'tarnogórski', 'śląskie', '7629', '8626', '113' UNION
+			SELECT 'Nowy Kalisz', 'Kalisz[a]', 'wielkopolskie', '6942', '100975', '1455' UNION
+			SELECT 'Nowy Kalisz Pomorski', 'drawski', 'zachodniopomorskie', '1196', '4377', '366' UNION
+			SELECT 'Nowy Kalwaria Zebrzydowska', 'wadowicki', 'małopolskie', '550', '4515', '821' UNION
+			SELECT 'Nowy Kałuszyn', 'miński', 'mazowieckie', '1230', '2890', '235' UNION
+			SELECT 'Nowy Kamienna Góra', 'kamiennogórski', 'dolnośląskie', '1804', '19136', '1061' UNION
+			SELECT 'Nowy Kamień Krajeński', 'sępoleński', 'kujawsko-pomorskie', '365', '2386', '654' UNION
+			SELECT 'Nowy Kamień Pomorski', 'kamieński', 'zachodniopomorskie', '1074', '8846', '824' UNION
+			SELECT 'Nowy Kamieńsk', 'radomszczański', 'łódzkie', '1199', '2782', '232' UNION
+			SELECT 'Nowy Kańczuga', 'przeworski', 'podkarpackie', '760', '3171', '417' UNION
+			SELECT 'Nowy Karczew', 'otwocki', 'mazowieckie', '2812', '9891', '352' UNION
+			SELECT 'Nowy Kargowa', 'zielonogórski', 'lubuskie', '455', '3754', '825' UNION
+			SELECT 'Nowy Karlino', 'białogardzki', 'zachodniopomorskie', '940', '5919', '630' UNION
+			SELECT 'Nowy Karpacz', 'jeleniogórski', 'dolnośląskie', '3799', '4633', '122' UNION
+			SELECT 'Nowy Kartuzy', 'kartuski', 'pomorskie', '735', '14557', '1981' UNION
+			SELECT 'Nowy Katowice', 'Katowice[a]', 'śląskie', '16464', '294510', '1789' UNION
+			SELECT 'Nowy Kazimierz Dolny', 'puławski', 'lubelskie', '3044', '2579', '85' UNION
+			SELECT 'Nowy Kazimierza Wielka', 'kazimierski', 'świętokrzyskie', '533', '5579', '1047' UNION
+			SELECT 'Nowy Kąty Wrocławskie', 'wrocławski', 'dolnośląskie', '861', '6948', '807' UNION
+			SELECT 'Nowy Kcynia', 'nakielski', 'kujawsko-pomorskie', '684', '4670', '683' UNION
+			SELECT 'Nowy Kędzierzyn-Koźle', 'kędzierzyńsko-kozielski', 'opolskie', '12371', '61062', '494' UNION
+			SELECT 'Nowy Kępice', 'słupski', 'pomorskie', '611', '3606', '590' UNION
+			SELECT 'Nowy Kępno', 'kępiński', 'wielkopolskie', '779', '14123', '1813' UNION
+			SELECT 'Nowy Kętrzyn', 'kętrzyński', 'warmińsko-mazurskie', '1035', '27366', '2644' UNION
+			SELECT 'Nowy Kęty', 'oświęcimski', 'małopolskie', '2305', '18744', '813' UNION
+			SELECT 'Nowy Kielce', 'Kielce[a]', 'świętokrzyskie', '10965', '195774', '1785' UNION
+			SELECT 'Nowy Kietrz', 'głubczycki', 'opolskie', '1874', '6034', '322' UNION
+			SELECT 'Nowy Kisielice', 'iławski', 'warmińsko-mazurskie', '337', '2103', '624' UNION
+			SELECT 'Nowy Kleczew', 'koniński', 'wielkopolskie', '780', '4186', '537' UNION
+			SELECT 'Nowy Kleszczele', 'hajnowski', 'podlaskie', '4671', '1271', '27' UNION
+			SELECT 'Nowy Kluczbork', 'kluczborski', 'opolskie', '1235', '23661', '1916' UNION
+			SELECT 'Nowy Kłecko', 'gnieźnieński', 'wielkopolskie', '962', '2637', '274' UNION
+			SELECT 'Nowy Kłobuck', 'kłobucki', 'śląskie', '4746', '12957', '273' UNION
+			SELECT 'Nowy Kłodawa', 'kolski', 'wielkopolskie', '431', '6481', '1504' UNION
+			SELECT 'Nowy Kłodzko', 'kłodzki', 'dolnośląskie', '2484', '26954', '1085' UNION
+			SELECT 'Nowy Knurów', 'gliwicki', 'śląskie', '3395', '38402', '1131' UNION
+			SELECT 'Nowy Knyszyn', 'moniecki', 'podlaskie', '2368', '2755', '116' UNION
+			SELECT 'Nowy Kobylin', 'krotoszyński', 'wielkopolskie', '487', '3245', '666' UNION
+			SELECT 'Nowy Kobyłka', 'wołomiński', 'mazowieckie', '1964', '23706', '1207' UNION
+			SELECT 'Nowy Kock', 'lubartowski', 'lubelskie', '1678', '3315', '198' UNION
+			SELECT 'Nowy Kolbuszowa', 'kolbuszowski', 'podkarpackie', '798', '9133', '1144' UNION
+			SELECT 'Nowy Kolno', 'kolneński', 'podlaskie', '2507', '10261', '409' UNION
+			SELECT 'Nowy Kolonowskie', 'strzelecki', 'opolskie', '5570', '3328', '60' UNION
+			SELECT 'Nowy Koluszki', 'łódzki wschodni', 'łódzkie', '990', '13026', '1316' UNION
+			SELECT 'Nowy Kołaczyce', 'jasielski', 'podkarpackie', '715', '1403', '196' UNION
+			SELECT 'Nowy Koło', 'kolski', 'wielkopolskie', '1385', '21994', '1588' UNION
+			SELECT 'Nowy Kołobrzeg', 'kołobrzeski', 'zachodniopomorskie', '2567', '46367', '1806' UNION
+			SELECT 'Nowy Koniecpol', 'częstochowski', 'śląskie', '3692', '5950', '161' UNION
+			SELECT 'Nowy Konin', 'Konin[a]', 'wielkopolskie', '8231', '74151', '901' UNION
+			SELECT 'Nowy Konstancin-Jeziorna', 'piaseczyński', 'mazowieckie', '1774', '17086', '963' UNION
+			SELECT 'Nowy Konstantynów Łódzki', 'pabianicki', 'łódzkie', '2725', '18096', '664' UNION
+			SELECT 'Nowy Końskie', 'konecki', 'świętokrzyskie', '1770', '19330', '1092' UNION
+			SELECT 'Nowy Koprzywnica', 'sandomierski', 'świętokrzyskie', '1790', '2488', '139' UNION
+			SELECT 'Nowy Korfantów', 'nyski', 'opolskie', '1023', '1817', '178' UNION
+			SELECT 'Nowy Koronowo', 'bydgoski', 'kujawsko-pomorskie', '2815', '11182', '397' UNION
+			SELECT 'Nowy Korsze', 'kętrzyński', 'warmińsko-mazurskie', '403', '4259', '1057' UNION
+			SELECT 'Nowy Kosów Lacki', 'sokołowski', 'mazowieckie', '1157', '2088', '180' UNION
+			SELECT 'Nowy Kostrzyn', 'poznański', 'wielkopolskie', '798', '9677', '1213' UNION
+			SELECT 'Nowy Kostrzyn nad Odrą', 'gorzowski', 'lubuskie', '4614', '17776', '385' UNION
+			SELECT 'Nowy Koszalin', 'Koszalin[a]', 'zachodniopomorskie', '9834', '107321', '1091' UNION
+			SELECT 'Nowy Koszyce', 'proszowicki', 'małopolskie', '325', '782', '241' UNION
+			SELECT 'Nowy Kościan', 'kościański', 'wielkopolskie', '901', '23923', '2655' UNION
+			SELECT 'Nowy Kościerzyna', 'kościerski', 'pomorskie', '1586', '23759', '1498' UNION
+			SELECT 'Nowy Kowal', 'włocławski', 'kujawsko-pomorskie', '468', '3499', '748' UNION
+			SELECT 'Nowy Kowalewo Pomorskie', 'golubsko-dobrzyński', 'kujawsko-pomorskie', '445', '4143', '931' UNION
+			SELECT 'Nowy Kowary', 'jeleniogórski', 'dolnośląskie', '3739', '10957', '293' UNION
+			SELECT 'Nowy Koziegłowy', 'myszkowski', 'śląskie', '2671', '2463', '92' UNION
+			SELECT 'Nowy Kozienice', 'kozienicki', 'mazowieckie', '1045', '17331', '1658' UNION
+			SELECT 'Nowy Koźmin Wielkopolski', 'krotoszyński', 'wielkopolskie', '589', '6536', '1110' UNION
+			SELECT 'Nowy Kożuchów', 'nowosolski', 'lubuskie', '594', '9490', '1598' UNION
+			SELECT 'Nowy Kórnik', 'poznański', 'wielkopolskie', '599', '7847', '1310' UNION
+			SELECT 'Nowy Krajenka', 'złotowski', 'wielkopolskie', '376', '3638', '968' UNION
+			SELECT 'Nowy Kraków', 'Kraków[a]', 'małopolskie', '32685', '771069', '2359' UNION
+			SELECT 'Nowy Krapkowice', 'krapkowicki', 'opolskie', '2101', '16381', '780' UNION
+			SELECT 'Nowy Krasnobród', 'zamojski', 'lubelskie', '699', '3094', '443' UNION
+			SELECT 'Nowy Krasnystaw', 'krasnostawski', 'lubelskie', '4213', '18778', '446' UNION
+			SELECT 'Nowy Kraśnik', 'kraśnicki', 'lubelskie', '2610', '34539', '1323' UNION
+			SELECT 'Nowy Krobia', 'gostyński', 'wielkopolskie', '705', '4313', '612' UNION
+			SELECT 'Nowy Krosno', 'Krosno[a]', 'podkarpackie', '4350', '46511', '1069' UNION
+			SELECT 'Nowy Krosno Odrzańskie', 'krośnieński', 'lubuskie', '815', '11378', '1396' UNION
+			SELECT 'Nowy Krośniewice', 'kutnowski', 'łódzkie', '418', '4375', '1047' UNION
+			SELECT 'Nowy Krotoszyn', 'krotoszyński', 'wielkopolskie', '2254', '28969', '1285' UNION
+			SELECT 'Nowy Kruszwica', 'inowrocławski', 'kujawsko-pomorskie', '664', '8818', '1328' UNION
+			SELECT 'Nowy Krynica Morska', 'nowodworski', 'pomorskie', '11856', '1303', '11' UNION
+			SELECT 'Nowy Krynica-Zdrój', 'nowosądecki', 'małopolskie', '3968', '10686', '269' UNION
+			SELECT 'Nowy Krynki', 'sokólski', 'podlaskie', '383', '2415', '631' UNION
+			SELECT 'Nowy Krzanowice', 'raciborski', 'śląskie', '308', '2158', '701' UNION
+			SELECT 'Nowy Krzepice', 'kłobucki', 'śląskie', '2766', '4462', '161' UNION
+			SELECT 'Nowy Krzeszowice', 'krakowski', 'małopolskie', '1697', '10051', '592' UNION
+			SELECT 'Nowy Krzywiń', 'kościański', 'wielkopolskie', '227', '1714', '755' UNION
+			SELECT 'Nowy Krzyż Wielkopolski', 'czarnkowsko-trzcianecki', 'wielkopolskie', '581', '6216', '1070' UNION
+			SELECT 'Nowy Książ Wielkopolski', 'śremski', 'wielkopolskie', '196', '2726', '1391' UNION
+			SELECT 'Nowy Kudowa-Zdrój', 'kłodzki', 'dolnośląskie', '3390', '9954', '294' UNION
+			SELECT 'Nowy Kunów', 'ostrowiecki', 'świętokrzyskie', '726', '2979', '410' UNION
+			SELECT 'Nowy Kutno', 'kutnowski', 'łódzkie', '3359', '44172', '1315' UNION
+			SELECT 'Nowy Kuźnia Raciborska', 'raciborski', 'śląskie', '3149', '5386', '171' UNION
+			SELECT 'Nowy Kwidzyn', 'kwidzyński', 'pomorskie', '2154', '38481', '1786' UNION
+			SELECT 'Nowy Lądek-Zdrój', 'kłodzki', 'dolnośląskie', '2032', '5622', '277' UNION
+			SELECT 'Nowy Legionowo', 'legionowski', 'mazowieckie', '1354', '54066', '3993' UNION
+			SELECT 'Nowy Legnica', 'Legnica[a]', 'dolnośląskie', '5629', '99752', '1772' UNION
+			SELECT 'Nowy Lesko', 'leski', 'podkarpackie', '1533', '5431', '354' UNION
+			SELECT 'Nowy Leszno', 'Leszno[a]', 'wielkopolskie', '3186', '63952', '2007' UNION
+			SELECT 'Nowy Leśna', 'lubański', 'dolnośląskie', '856', '4484', '524' UNION
+			SELECT 'Nowy Leśnica', 'strzelecki', 'opolskie', '1450', '2585', '178' UNION
+			SELECT 'Nowy Lewin Brzeski', 'brzeski', 'opolskie', '1164', '5743', '493' UNION
+			SELECT 'Nowy Leżajsk', 'leżajski', 'podkarpackie', '2058', '13891', '675' UNION
+			SELECT 'Nowy Lębork', 'lęborski', 'pomorskie', '1786', '35367', '1980' UNION
+			SELECT 'Nowy Lędziny', 'bieruńsko-lędziński', 'śląskie', '3165', '16822', '532' UNION
+			SELECT 'Nowy Libiąż', 'chrzanowski', 'małopolskie', '3585', '17084', '477' UNION
+			SELECT 'Nowy Lidzbark', 'działdowski', 'warmińsko-mazurskie', '568', '7817', '1376' UNION
+			SELECT 'Nowy Lidzbark Warmiński', 'lidzbarski', 'warmińsko-mazurskie', '1435', '15820', '1102' UNION
+			SELECT 'Nowy Limanowa', 'limanowski', 'małopolskie', '1870', '15158', '811' UNION
+			SELECT 'Nowy Lipiany', 'pyrzycki', 'zachodniopomorskie', '554', '3946', '712' UNION
+			SELECT 'Nowy Lipno', 'lipnowski', 'kujawsko-pomorskie', '1099', '14478', '1317' UNION
+			SELECT 'Nowy Lipsk', 'augustowski', 'podlaskie', '498', '2350', '472' UNION
+			SELECT 'Nowy Lipsko', 'lipski', 'mazowieckie', '1570', '5544', '353' UNION
+			SELECT 'Nowy Lubaczów', 'lubaczowski', 'podkarpackie', '2573', '12078', '469' UNION
+			SELECT 'Nowy Lubań', 'lubański', 'dolnośląskie', '1612', '21168', '1313' UNION
+			SELECT 'Nowy Lubartów', 'lubartowski', 'lubelskie', '1391', '21995', '1581' UNION
+			SELECT 'Nowy Lubawa', 'iławski', 'warmińsko-mazurskie', '1684', '10381', '616' UNION
+			SELECT 'Nowy Lubawka', 'kamiennogórski', 'dolnośląskie', '2244', '6063', '270' UNION
+			SELECT 'Nowy Lubień Kujawski', 'włocławski', 'kujawsko-pomorskie', '231', '1397', '605' UNION
+			SELECT 'Nowy Lubin', 'lubiński', 'dolnośląskie', '4077', '72581', '1780' UNION
+			SELECT 'Nowy Lublin', 'Lublin[a]', 'lubelskie', '14747', '339682', '2303' UNION
+			SELECT 'Nowy Lubliniec', 'lubliniecki', 'śląskie', '8936', '23818', '267' UNION
+			SELECT 'Nowy Lubniewice', 'sulęciński', 'lubuskie', '1211', '2042', '169' UNION
+			SELECT 'Nowy Lubomierz', 'lwówecki', 'dolnośląskie', '805', '1990', '247' UNION
+			SELECT 'Nowy Luboń', 'poznański', 'wielkopolskie', '1351', '31783', '2353' UNION
+			SELECT 'Nowy Lubowidz', 'żuromiński', 'mazowieckie', '527', '1697', '322' UNION
+			SELECT 'Nowy Lubraniec', 'włocławski', 'kujawsko-pomorskie', '197', '3028', '1537' UNION
+			SELECT 'Nowy Lubsko', 'żarski', 'lubuskie', '1251', '14000', '1119' UNION
+			SELECT 'Nowy Lubycza Królewska', 'tomaszowski', 'lubelskie', '392', '2443', '623' UNION
+			SELECT 'Nowy Lwówek', 'nowotomyski', 'wielkopolskie', '316', '2977', '942' UNION
+			SELECT 'Nowy Lwówek Śląski', 'lwówecki', 'dolnośląskie', '1665', '8870', '533' UNION
+			SELECT 'Nowy Łabiszyn', 'żniński', 'kujawsko-pomorskie', '289', '4501', '1557' UNION
+			SELECT 'Nowy Łagów', 'kielecki', 'świętokrzyskie', '822', '1587', '193' UNION
+			SELECT 'Nowy Łańcut', 'łańcucki', 'podkarpackie', '1942', '17738', '913' UNION
+			SELECT 'Nowy Łapy', 'białostocki', 'podlaskie', '1214', '15643', '1289' UNION
+			SELECT 'Nowy Łasin', 'grudziądzki', 'kujawsko-pomorskie', '479', '3298', '689' UNION
+			SELECT 'Nowy Łask', 'łaski', 'łódzkie', '1567', '17344', '1107' UNION
+			SELECT 'Nowy Łaskarzew', 'garwoliński', 'mazowieckie', '1535', '4860', '317' UNION
+			SELECT 'Nowy Łaszczów', 'tomaszowski', 'lubelskie', '501', '2154', '430' UNION
+			SELECT 'Nowy Łaziska Górne', 'mikołowski', 'śląskie', '2007', '22334', '1113' UNION
+			SELECT 'Nowy Łazy', 'zawierciański', 'śląskie', '860', '6845', '796' UNION
+			SELECT 'Nowy Łeba', 'lęborski', 'pomorskie', '1656', '3675', '222' UNION
+			SELECT 'Nowy Łęczna', 'łęczyński', 'lubelskie', '1900', '19006', '1000' UNION
+			SELECT 'Nowy Łęczyca', 'łęczycki', 'łódzkie', '895', '14094', '1575' UNION
+			SELECT 'Nowy Łęknica', 'żarski', 'lubuskie', '1643', '2483', '151' UNION
+			SELECT 'Nowy Łobez', 'łobeski', 'zachodniopomorskie', '1284', '10241', '798' UNION
+			SELECT 'Nowy Łobżenica', 'pilski', 'wielkopolskie', '325', '2972', '914' UNION
+			SELECT 'Nowy Łochów', 'węgrowski', 'mazowieckie', '1339', '6821', '509' UNION
+			SELECT 'Nowy Łomianki', 'warszawski zachodni', 'mazowieckie', '840', '16977', '2021' UNION
+			SELECT 'Nowy Łomża', 'Łomża[a]', 'podlaskie', '3267', '63000', '1928' UNION
+			SELECT 'Nowy Łosice', 'łosicki', 'mazowieckie', '2374', '7071', '298' UNION
+			SELECT 'Nowy Łowicz', 'łowicki', 'łódzkie', '2342', '28501', '1217' UNION
+			SELECT 'Nowy Łódź', 'Łódź[a]', 'łódzkie', '29325', '685285', '2337' UNION
+			SELECT 'Nowy Łuków', 'łukowski', 'lubelskie', '3575', '30025', '840' UNION
+			SELECT 'Nowy Maków Mazowiecki', 'makowski', 'mazowieckie', '1028', '9787', '952' UNION
+			SELECT 'Nowy Maków Podhalański', 'suski', 'małopolskie', '2012', '5853', '291' UNION
+			SELECT 'Nowy Malbork', 'malborski', 'pomorskie', '1716', '38570', '2248' UNION
+			SELECT 'Nowy Małogoszcz', 'jędrzejowski', 'świętokrzyskie', '968', '3769', '389' UNION
+			SELECT 'Nowy Małomice', 'żagański', 'lubuskie', '537', '3489', '650' UNION
+			SELECT 'Nowy Margonin', 'chodzieski', 'wielkopolskie', '515', '3019', '586' UNION
+			SELECT 'Nowy Marki', 'wołomiński', 'mazowieckie', '2615', '33914', '1297' UNION
+			SELECT 'Nowy Maszewo', 'goleniowski', 'zachodniopomorskie', '554', '3363', '607' UNION
+			SELECT 'Nowy Miasteczko Śląskie', 'tarnogórski', 'śląskie', '6783', '7449', '110' UNION
+			SELECT 'Nowy Miastko', 'bytowski', 'pomorskie', '568', '10473', '1844' UNION
+			SELECT 'Nowy Michałowo', 'białostocki', 'podlaskie', '215', '3047', '1417' UNION
+			SELECT 'Nowy Miechów', 'miechowski', 'małopolskie', '1549', '11652', '752' UNION
+			SELECT 'Nowy Miejska Górka', 'rawicki', 'wielkopolskie', '314', '3244', '1033' UNION
+			SELECT 'Nowy Mielec', 'mielecki', 'podkarpackie', '4689', '60478', '1290' UNION
+			SELECT 'Nowy Mielno', 'koszaliński', 'zachodniopomorskie', '3345', '2952', '88' UNION
+			SELECT 'Nowy Mieroszów', 'wałbrzyski', 'dolnośląskie', '1031', '4106', '398' UNION
+			SELECT 'Nowy Mieszkowice', 'gryfiński', 'zachodniopomorskie', '525', '3645', '694' UNION
+			SELECT 'Nowy Międzybórz', 'oleśnicki', 'dolnośląskie', '641', '2352', '367' UNION
+			SELECT 'Nowy Międzychód', 'międzychodzki', 'wielkopolskie', '698', '10623', '1522' UNION
+			SELECT 'Nowy Międzylesie', 'kłodzki', 'dolnośląskie', '1437', '2591', '180' UNION
+			SELECT 'Nowy Międzyrzec Podlaski', 'bialski', 'lubelskie', '2003', '16796', '839' UNION
+			SELECT 'Nowy Międzyrzecz', 'międzyrzecki', 'lubuskie', '1026', '18099', '1764' UNION
+			SELECT 'Nowy Międzyzdroje', 'kamieński', 'zachodniopomorskie', '516', '5399', '1046' UNION
+			SELECT 'Nowy Mikołajki', 'mrągowski', 'warmińsko-mazurskie', '932', '3838', '412' UNION
+			SELECT 'Nowy Mikołów', 'mikołowski', 'śląskie', '7921', '40813', '515' UNION
+			SELECT 'Nowy Mikstat', 'ostrzeszowski', 'wielkopolskie', '252', '1855', '736' UNION
+			SELECT 'Nowy Milanówek', 'grodziski', 'mazowieckie', '1344', '16306', '1213' UNION
+			SELECT 'Nowy Milicz', 'milicki', 'dolnośląskie', '1350', '11357', '841' UNION
+			SELECT 'Nowy Miłakowo', 'ostródzki', 'warmińsko-mazurskie', '876', '2560', '292' UNION
+			SELECT 'Nowy Miłomłyn', 'ostródzki', 'warmińsko-mazurskie', '1238', '2442', '197' UNION
+			SELECT 'Nowy Miłosław', 'wrzesiński', 'wielkopolskie', '407', '3572', '878' UNION
+			SELECT 'Nowy Mińsk Mazowiecki', 'miński', 'mazowieckie', '1318', '40799', '3096' UNION
+			SELECT 'Nowy Mirosławiec', 'wałecki', 'zachodniopomorskie', '241', '3089', '1282' UNION
+			SELECT 'Nowy Mirsk', 'lwówecki', 'dolnośląskie', '1466', '3902', '266' UNION
+			SELECT 'Nowy Mława', 'mławski', 'mazowieckie', '3480', '31234', '898' UNION
+			SELECT 'Nowy Młynary', 'elbląski', 'warmińsko-mazurskie', '276', '1780', '645' UNION
+			SELECT 'Nowy Modliborzyce', 'janowski', 'lubelskie', '789', '1460', '185' UNION
+			SELECT 'Nowy Mogielnica', 'grójecki', 'mazowieckie', '1298', '2260', '174' UNION
+			SELECT 'Nowy Mogilno', 'mogileński', 'kujawsko-pomorskie', '832', '11880', '1428' UNION
+			SELECT 'Nowy Mońki', 'moniecki', 'podlaskie', '766', '10010', '1307' UNION
+			SELECT 'Nowy Morawica', 'kielecki', 'świętokrzyskie', '438', '1695', '387' UNION
+			SELECT 'Nowy Morąg', 'ostródzki', 'warmińsko-mazurskie', '611', '13838', '2265' UNION
+			SELECT 'Nowy Mordy', 'siedlecki', 'mazowieckie', '454', '1793', '395' UNION
+			SELECT 'Nowy Moryń', 'gryfiński', 'zachodniopomorskie', '554', '1626', '294' UNION
+			SELECT 'Nowy Mosina', 'poznański', 'wielkopolskie', '1350', '14015', '1038' UNION
+			SELECT 'Nowy Mrągowo', 'mrągowski', 'warmińsko-mazurskie', '1481', '21708', '1466' UNION
+			SELECT 'Nowy Mrocza', 'nakielski', 'kujawsko-pomorskie', '501', '4366', '871' UNION
+			SELECT 'Nowy Mrozy', 'miński', 'mazowieckie', '773', '3552', '460' UNION
+			SELECT 'Nowy Mszana Dolna', 'limanowski', 'małopolskie', '2710', '7948', '293' UNION
+			SELECT 'Nowy Mszczonów', 'żyrardowski', 'mazowieckie', '856', '6386', '746' UNION
+			SELECT 'Nowy Murowana Goślina', 'poznański', 'wielkopolskie', '862', '10396', '1206' UNION
+			SELECT 'Nowy Muszyna', 'nowosądecki', 'małopolskie', '2443', '4831', '198' UNION
+			SELECT 'Nowy Mysłowice', 'Mysłowice[a]', 'śląskie', '6562', '74586', '1137' UNION
+			SELECT 'Nowy Myszków', 'myszkowski', 'śląskie', '7359', '31762', '432' UNION
+			SELECT 'Nowy Myszyniec', 'ostrołęcki', 'mazowieckie', '1122', '3426', '305' UNION
+			SELECT 'Nowy Myślenice', 'myślenicki', 'małopolskie', '3022', '18386', '608' UNION
+			SELECT 'Nowy Myślibórz', 'myśliborski', 'zachodniopomorskie', '1504', '11235', '747' UNION
+			SELECT 'Nowy Nakło nad Notecią', 'nakielski', 'kujawsko-pomorskie', '1082', '18353', '1696' UNION
+			SELECT 'Nowy Nałęczów', 'puławski', 'lubelskie', '1382', '3768', '273' UNION
+			SELECT 'Nowy Namysłów', 'namysłowski', 'opolskie', '2261', '16490', '729' UNION
+			SELECT 'Nowy Narol', 'lubaczowski', 'podkarpackie', '1242', '2076', '167' UNION
+			SELECT 'Nowy Nasielsk', 'nowodworski', 'mazowieckie', '1257', '7707', '613' UNION
+			SELECT 'Nowy Nekla', 'wrzesiński', 'wielkopolskie', '1979', '3754', '190' UNION
+			SELECT 'Nowy Nidzica', 'nidzicki', 'warmińsko-mazurskie', '686', '13820', '2015' UNION
+			SELECT 'Nowy Niemcza', 'dzierżoniowski', 'dolnośląskie', '1981', '2974', '150' UNION
+			SELECT 'Nowy Niemodlin', 'opolski', 'opolskie', '1311', '6359', '485' UNION
+			SELECT 'Nowy Niepołomice', 'wielicki', 'małopolskie', '2740', '13001', '474' UNION
+			SELECT 'Nowy Nieszawa', 'aleksandrowski', 'kujawsko-pomorskie', '979', '1886', '193' UNION
+			SELECT 'Nowy Nisko', 'niżański', 'podkarpackie', '6096', '15359', '252' UNION
+			SELECT 'Nowy Nowa Dęba', 'tarnobrzeski', 'podkarpackie', '1670', '11181', '670' UNION
+			SELECT 'Nowy Nowa Ruda', 'kłodzki', 'dolnośląskie', '3705', '22246', '600' UNION
+			SELECT 'Nowy Nowa Sarzyna', 'leżajski', 'podkarpackie', '915', '5880', '643' UNION
+			SELECT 'Nowy Nowa Słupia', 'kielecki', 'świętokrzyskie', '1397', '1361', '97' UNION
+			SELECT 'Nowy Nowa Sól', 'nowosolski', 'lubuskie', '2180', '38843', '1782' UNION
+			SELECT 'Nowy Nowe', 'świecki', 'kujawsko-pomorskie', '357', '5864', '1643' UNION
+			SELECT 'Nowy Nowe Brzesko', 'proszowicki', 'małopolskie', '726', '1683', '232' UNION
+			SELECT 'Nowy Nowe Miasteczko', 'nowosolski', 'lubuskie', '329', '2770', '842' UNION
+			SELECT 'Nowy Nowe Miasto Lubawskie', 'nowomiejski', 'warmińsko-mazurskie', '1137', '10925', '961' UNION
+			SELECT 'Nowy Nowe Miasto nad Pilicą', 'grójecki', 'mazowieckie', '1125', '3789', '337' UNION
+			SELECT 'Nowy Nowe Skalmierzyce', 'ostrowski', 'wielkopolskie', '158', '4770', '3019' UNION
+			SELECT 'Nowy Nowe Warpno', 'policki', 'zachodniopomorskie', '2451', '1192', '49' UNION
+			SELECT 'Nowy Nowogard', 'goleniowski', 'zachodniopomorskie', '1257', '16671', '1326' UNION
+			SELECT 'Nowy Nowogrodziec', 'bolesławiecki', 'dolnośląskie', '1610', '4235', '263' UNION
+			SELECT 'Nowy Nowogród', 'łomżyński', 'podlaskie', '2055', '2156', '105' UNION
+			SELECT 'Nowy Nowogród Bobrzański', 'zielonogórski', 'lubuskie', '1463', '5188', '355' UNION
+			SELECT 'Nowy Nowy Dwór Gdański', 'nowodworski', 'pomorskie', '507', '9917', '1956' UNION
+			SELECT 'Nowy Nowy Dwór Mazowiecki', 'nowodworski', 'mazowieckie', '2821', '28647', '1015' UNION
+			SELECT 'Nowy Nowy Korczyn', 'buski', 'świętokrzyskie', '752', '955', '127' UNION
+			SELECT 'Nowy Nowy Sącz', 'Nowy Sącz[a]', 'małopolskie', '5758', '83896', '1457' UNION
+			SELECT 'Nowy Nowy Staw', 'malborski', 'pomorskie', '467', '4283', '917' UNION
+			SELECT 'Nowy Nowy Targ', 'nowotarski', 'małopolskie', '5107', '33373', '653' UNION
+			SELECT 'Nowy Nowy Tomyśl', 'nowotomyski', 'wielkopolskie', '520', '14603', '2808' UNION
+			SELECT 'Nowy Nowy Wiśnicz', 'bocheński', 'małopolskie', '497', '2745', '552' UNION
+			SELECT 'Nowy Nysa', 'nyski', 'opolskie', '2751', '44044', '1601' UNION
+			SELECT 'Nowy Oborniki', 'obornicki', 'wielkopolskie', '1408', '18179', '1291' UNION
+			SELECT 'Nowy Oborniki Śląskie', 'trzebnicki', 'dolnośląskie', '1446', '9109', '630' UNION
+			SELECT 'Nowy Obrzycko', 'szamotulski', 'wielkopolskie', '374', '2385', '638' UNION
+			SELECT 'Nowy Odolanów', 'ostrowski', 'wielkopolskie', '476', '5130', '1078' UNION
+			SELECT 'Nowy Ogrodzieniec', 'zawierciański', 'śląskie', '2856', '4296', '150' UNION
+			SELECT 'Nowy Okonek', 'złotowski', 'wielkopolskie', '601', '3900', '649' UNION
+			SELECT 'Nowy Olecko', 'olecki', 'warmińsko-mazurskie', '1154', '16477', '1428' UNION
+			SELECT 'Nowy Olesno', 'oleski', 'opolskie', '1508', '9406', '624' UNION
+			SELECT 'Nowy Oleszyce', 'lubaczowski', 'podkarpackie', '508', '2993', '589' UNION
+			SELECT 'Nowy Oleśnica', 'oleśnicki', 'dolnośląskie', '2096', '37242', '1777' UNION
+			SELECT 'Nowy Oleśnica', 'staszowski', 'świętokrzyskie', '1004', '1848', '184' UNION
+			SELECT 'Nowy Olkusz', 'olkuski', 'małopolskie', '2565', '35608', '1388' UNION
+			SELECT 'Nowy Olsztyn', 'Olsztyn[a]', 'warmińsko-mazurskie', '8833', '172362', '1951' UNION
+			SELECT 'Nowy Olsztynek', 'olsztyński', 'warmińsko-mazurskie', '769', '7581', '986' UNION
+			SELECT 'Nowy Olszyna', 'lubański', 'dolnośląskie', '2026', '4359', '215' UNION
+			SELECT 'Nowy Oława', 'oławski', 'dolnośląskie', '2736', '32927', '1203' UNION
+			SELECT 'Nowy Opalenica', 'nowotomyski', 'wielkopolskie', '642', '9596', '1495' UNION
+			SELECT 'Nowy Opatowiec', 'kazimierski', 'świętokrzyskie', '547', '329', '60' UNION
+			SELECT 'Nowy Opatów', 'opatowski', 'świętokrzyskie', '936', '6496', '694' UNION
+			SELECT 'Nowy Opatówek', 'kaliski', 'wielkopolskie', '868', '3677', '424' UNION
+			SELECT 'Nowy Opoczno', 'opoczyński', 'łódzkie', '2699', '21327', '790' UNION
+			SELECT 'Nowy Opole', 'Opole[a]', 'opolskie', '14888', '128137', '861' UNION
+			SELECT 'Nowy Opole Lubelskie', 'opolski', 'lubelskie', '1512', '8470', '560' UNION
+			SELECT 'Nowy Orneta', 'lidzbarski', 'warmińsko-mazurskie', '963', '8817', '916' UNION
+			SELECT 'Nowy Orzesze', 'mikołowski', 'śląskie', '8375', '20927', '250' UNION
+			SELECT 'Nowy Orzysz', 'piski', 'warmińsko-mazurskie', '817', '5579', '683' UNION
+			SELECT 'Nowy Osieczna', 'leszczyński', 'wielkopolskie', '476', '2347', '493' UNION
+			SELECT 'Nowy Osiek', 'staszowski', 'świętokrzyskie', '1743', '2015', '116' UNION
+			SELECT 'Nowy Ostrołęka', 'Ostrołęka[a]', 'mazowieckie', '3346', '52262', '1562' UNION
+			SELECT 'Nowy Ostroróg', 'szamotulski', 'wielkopolskie', '125', '1920', '1536' UNION
+			SELECT 'Nowy Ostrowiec Świętokrzyski', 'ostrowiecki', 'świętokrzyskie', '4643', '69051', '1487' UNION
+			SELECT 'Nowy Ostróda', 'ostródzki', 'warmińsko-mazurskie', '1415', '32996', '2332' UNION
+			SELECT 'Nowy Ostrów Lubelski', 'lubartowski', 'lubelskie', '2977', '2092', '70' UNION
+			SELECT 'Nowy Ostrów Mazowiecka', 'ostrowski', 'mazowieckie', '2227', '22545', '1012' UNION
+			SELECT 'Nowy Ostrów Wielkopolski', 'ostrowski', 'wielkopolskie', '4190', '72050', '1720' UNION
+			SELECT 'Nowy Ostrzeszów', 'ostrzeszowski', 'wielkopolskie', '1213', '14176', '1169' UNION
+			SELECT 'Nowy Ośno Lubuskie', 'słubicki', 'lubuskie', '801', '3949', '493' UNION
+			SELECT 'Nowy Oświęcim', 'oświęcimski', 'małopolskie', '3000', '38300', '1277' UNION
+			SELECT 'Nowy Otmuchów', 'nyski', 'opolskie', '4954', '6615', '134' UNION
+			SELECT 'Nowy Otwock', 'otwocki', 'mazowieckie', '4731', '44880', '949' UNION
+			SELECT 'Nowy Otyń', 'nowosolski', 'lubuskie', '786', '1601', '204' UNION
+			SELECT 'Nowy Ozimek', 'opolski', 'opolskie', '325', '8725', '2685' UNION
+			SELECT 'Nowy Ozorków', 'zgierski', 'łódzkie', '1546', '19456', '1258' UNION
+			SELECT 'Nowy Ożarów', 'opatowski', 'świętokrzyskie', '779', '4599', '590' UNION
+			SELECT 'Nowy Ożarów Mazowiecki', 'warszawski zachodni', 'mazowieckie', '813', '11576', '1424' UNION
+			SELECT 'Nowy Pabianice', 'pabianicki', 'łódzkie', '3299', '65283', '1979' UNION
+			SELECT 'Nowy Pacanów', 'buski', 'świętokrzyskie', '713', '1117', '157' UNION
+			SELECT 'Nowy Paczków', 'nyski', 'opolskie', '660', '7530', '1141' UNION
+			SELECT 'Nowy Pajęczno', 'pajęczański', 'łódzkie', '2023', '6781', '335' UNION
+			SELECT 'Nowy Pakość', 'inowrocławski', 'kujawsko-pomorskie', '346', '5723', '1654' UNION
+			SELECT 'Nowy Parczew', 'parczewski', 'lubelskie', '805', '10650', '1323' UNION
+			SELECT 'Nowy Pasłęk', 'elbląski', 'warmińsko-mazurskie', '1063', '12211', '1149' UNION
+			SELECT 'Nowy Pasym', 'szczycieński', 'warmińsko-mazurskie', '1518', '2517', '166' UNION
+			SELECT 'Nowy Pelplin', 'tczewski', 'pomorskie', '442', '7818', '1769' UNION
+			SELECT 'Nowy Pełczyce', 'choszczeński', 'zachodniopomorskie', '1307', '2589', '198' UNION
+			SELECT 'Nowy Piaseczno', 'piaseczyński', 'mazowieckie', '1622', '48119', '2967' UNION
+			SELECT 'Nowy Piaski', 'świdnicki', 'lubelskie', '844', '2556', '303' UNION
+			SELECT 'Nowy Piastów', 'pruszkowski', 'mazowieckie', '576', '22657', '3934' UNION
+			SELECT 'Nowy Piechowice', 'jeleniogórski', 'dolnośląskie', '4322', '6222', '144' UNION
+			SELECT 'Nowy Piekary Śląskie', 'Piekary Śląskie[a]', 'śląskie', '3998', '55299', '1383' UNION
+			SELECT 'Nowy Pieniężno', 'braniewski', 'warmińsko-mazurskie', '381', '2746', '721' UNION
+			SELECT 'Nowy Pieńsk', 'zgorzelecki', 'dolnośląskie', '992', '5848', '590' UNION
+			SELECT 'Nowy Pierzchnica', 'kielecki', 'świętokrzyskie', '693', '1152', '166' UNION
+			SELECT 'Nowy Pieszyce', 'dzierżoniowski', 'dolnośląskie', '1772', '7136', '403' UNION
+			SELECT 'Nowy Pilawa', 'garwoliński', 'mazowieckie', '666', '4589', '689' UNION
+			SELECT 'Nowy Pilica', 'zawierciański', 'śląskie', '822', '1947', '237' UNION
+			SELECT 'Nowy Pilzno', 'dębicki', 'podkarpackie', '1604', '4903', '306' UNION
+			SELECT 'Nowy Piła', 'pilski', 'wielkopolskie', '10268', '73398', '715' UNION
+			SELECT 'Nowy Piława Górna', 'dzierżoniowski', 'dolnośląskie', '2093', '6457', '309' UNION
+			SELECT 'Nowy Pińczów', 'pińczowski', 'świętokrzyskie', '1433', '10844', '757' UNION
+			SELECT 'Nowy Pionki', 'radomski', 'mazowieckie', '1840', '18427', '1001' UNION
+			SELECT 'Nowy Piotrków Kujawski', 'radziejowski', 'kujawsko-pomorskie', '976', '4468', '458' UNION
+			SELECT 'Nowy Piotrków Trybunalski', 'Piotrków Trybunalski[a]', 'łódzkie', '6724', '73670', '1096' UNION
+			SELECT 'Nowy Pisz', 'piski', 'warmińsko-mazurskie', '1008', '19318', '1916' UNION
+			SELECT 'Nowy Piwniczna-Zdrój', 'nowosądecki', 'małopolskie', '3830', '5882', '154' UNION
+			SELECT 'Nowy Pleszew', 'pleszewski', 'wielkopolskie', '1338', '17356', '1297' UNION
+			SELECT 'Nowy Płock', 'Płock[a]', 'mazowieckie', '8804', '120000', '1363' UNION
+			SELECT 'Nowy Płońsk', 'płoński', 'mazowieckie', '1160', '22163', '1911' UNION
+			SELECT 'Nowy Płoty', 'gryficki', 'zachodniopomorskie', '412', '3983', '967' UNION
+			SELECT 'Nowy Pniewy', 'szamotulski', 'wielkopolskie', '932', '8060', '865' UNION
+			SELECT 'Nowy Pobiedziska', 'poznański', 'wielkopolskie', '1024', '9181', '897' UNION
+			SELECT 'Nowy Poddębice', 'poddębicki', 'łódzkie', '587', '7448', '1269' UNION
+			SELECT 'Nowy Podkowa Leśna', 'grodziski', 'mazowieckie', '1013', '3854', '380' UNION
+			SELECT 'Nowy Pogorzela', 'gostyński', 'wielkopolskie', '436', '2100', '482' UNION
+			SELECT 'Nowy Polanica-Zdrój', 'kłodzki', 'dolnośląskie', '1722', '6357', '369' UNION
+			SELECT 'Nowy Polanów', 'koszaliński', 'zachodniopomorskie', '737', '2918', '396' UNION
+			SELECT 'Nowy Police', 'policki', 'zachodniopomorskie', '3731', '32685', '876' UNION
+			SELECT 'Nowy Polkowice', 'polkowicki', 'dolnośląskie', '2374', '22487', '947' UNION
+			SELECT 'Nowy Połaniec', 'staszowski', 'świętokrzyskie', '1741', '8120', '466' UNION
+			SELECT 'Nowy Połczyn-Zdrój', 'świdwiński', 'zachodniopomorskie', '721', '8109', '1125' UNION
+			SELECT 'Nowy Poniatowa', 'opolski', 'lubelskie', '1526', '9195', '603' UNION
+			SELECT 'Nowy Poniec', 'gostyński', 'wielkopolskie', '348', '2851', '819' UNION
+			SELECT 'Nowy Poręba', 'zawierciański', 'śląskie', '3999', '8568', '214' UNION
+			SELECT 'Nowy Poznań', 'Poznań[a]', 'wielkopolskie', '26191', '536438', '2048' UNION
+			SELECT 'Nowy Prabuty', 'kwidzyński', 'pomorskie', '729', '8696', '1193' UNION
+			SELECT 'Nowy Praszka', 'oleski', 'opolskie', '935', '7704', '824' UNION
+			SELECT 'Nowy Prochowice', 'legnicki', 'dolnośląskie', '985', '3620', '368' UNION
+			SELECT 'Nowy Proszowice', 'proszowicki', 'małopolskie', '733', '6012', '820' UNION
+			SELECT 'Nowy Prószków', 'opolski', 'opolskie', '1622', '2591', '160' UNION
+			SELECT 'Nowy Pruchnik', 'jarosławski', 'podkarpackie', '1990', '3774', '190' UNION
+			SELECT 'Nowy Prudnik', 'prudnicki', 'opolskie', '2050', '21138', '1031' UNION
+			SELECT 'Nowy Prusice', 'trzebnicki', 'dolnośląskie', '1094', '2232', '204' UNION
+			SELECT 'Nowy Pruszcz Gdański', 'gdański', 'pomorskie', '1647', '30878', '1875' UNION
+			SELECT 'Nowy Pruszków', 'pruszkowski', 'mazowieckie', '1919', '61784', '3220' UNION
+			SELECT 'Nowy Przasnysz', 'przasnyski', 'mazowieckie', '2516', '17309', '688' UNION
+			SELECT 'Nowy Przecław', 'mielecki', 'podkarpackie', '1604', '1768', '110' UNION
+			SELECT 'Nowy Przedbórz', 'radomszczański', 'łódzkie', '608', '3572', '588' UNION
+			SELECT 'Nowy Przedecz', 'kolski', 'wielkopolskie', '298', '1670', '560' UNION
+			SELECT 'Nowy Przemków', 'polkowicki', 'dolnośląskie', '617', '6149', '997' UNION
+			SELECT 'Nowy Przemyśl', 'Przemyśl[a]', 'podkarpackie', '4617', '61251', '1327' UNION
+			SELECT 'Nowy Przeworsk', 'przeworski', 'podkarpackie', '2213', '15376', '695' UNION
+			SELECT 'Nowy Przysucha', 'przysuski', 'mazowieckie', '702', '5854', '834' UNION
+			SELECT 'Nowy Pszczyna', 'pszczyński', 'śląskie', '2249', '25829', '1148' UNION
+			SELECT 'Nowy Pszów', 'wodzisławski', 'śląskie', '2044', '13994', '685' UNION
+			SELECT 'Nowy Puck', 'pucki', 'pomorskie', '479', '11241', '2347' UNION
+			SELECT 'Nowy Puławy', 'puławski', 'lubelskie', '5049', '47774', '946' UNION
+			SELECT 'Nowy Pułtusk', 'pułtuski', 'mazowieckie', '2307', '19431', '842' UNION
+			SELECT 'Nowy Puszczykowo', 'poznański', 'wielkopolskie', '1639', '9698', '592' UNION
+			SELECT 'Nowy Pyrzyce', 'pyrzycki', 'zachodniopomorskie', '3879', '12617', '325' UNION
+			SELECT 'Nowy Pyskowice', 'gliwicki', 'śląskie', '3089', '18456', '597' UNION
+			SELECT 'Nowy Pyzdry', 'wrzesiński', 'wielkopolskie', '1216', '3145', '259' UNION
+			SELECT 'Nowy Rabka-Zdrój', 'nowotarski', 'małopolskie', '3631', '12780', '352' UNION
+			SELECT 'Nowy Raciąż', 'płoński', 'mazowieckie', '840', '4420', '526' UNION
+			SELECT 'Nowy Racibórz', 'raciborski', 'śląskie', '7501', '54882', '732' UNION
+			SELECT 'Nowy Radków', 'kłodzki', 'dolnośląskie', '1503', '2418', '161' UNION
+			SELECT 'Nowy Radlin', 'wodzisławski', 'śląskie', '1253', '17806', '1421' UNION
+			SELECT 'Nowy Radłów', 'tarnowski', 'małopolskie', '1683', '2767', '164' UNION
+			SELECT 'Nowy Radom', 'Radom[a]', 'mazowieckie', '11180', '213029', '1905' UNION
+			SELECT 'Nowy Radomsko', 'radomszczański', 'łódzkie', '5143', '46087', '896' UNION
+			SELECT 'Nowy Radomyśl Wielki', 'mielecki', 'podkarpackie', '879', '3196', '364' UNION
+			SELECT 'Nowy Radoszyce', 'konecki', 'świętokrzyskie', '1717', '3167', '184' UNION
+			SELECT 'Nowy Radymno', 'jarosławski', 'podkarpackie', '1362', '5314', '390' UNION
+			SELECT 'Nowy Radziejów', 'radziejowski', 'kujawsko-pomorskie', '569', '5602', '985' UNION
+			SELECT 'Nowy Radzionków', 'tarnogórski', 'śląskie', '1320', '16818', '1274' UNION
+			SELECT 'Nowy Radzymin', 'wołomiński', 'mazowieckie', '2339', '12876', '550' UNION
+			SELECT 'Nowy Radzyń Chełmiński', 'grudziądzki', 'kujawsko-pomorskie', '178', '1864', '1047' UNION
+			SELECT 'Nowy Radzyń Podlaski', 'radzyński', 'lubelskie', '1931', '15731', '815' UNION
+			SELECT 'Nowy Rajgród', 'grajewski', 'podlaskie', '3528', '1585', '45' UNION
+			SELECT 'Nowy Rakoniewice', 'grodziski', 'wielkopolskie', '337', '3599', '1068' UNION
+			SELECT 'Nowy Raszków', 'ostrowski', 'wielkopolskie', '205', '2099', '1024' UNION
+			SELECT 'Nowy Rawa Mazowiecka', 'rawski', 'łódzkie', '1430', '17408', '1217' UNION
+			SELECT 'Nowy Rawicz', 'rawicki', 'wielkopolskie', '774', '20337', '2628' UNION
+			SELECT 'Nowy Recz', 'choszczeński', 'zachodniopomorskie', '1240', '2914', '235' UNION
+			SELECT 'Nowy Reda', 'wejherowski', 'pomorskie', '3346', '25810', '771' UNION
+			SELECT 'Nowy Rejowiec', 'chełmski', 'lubelskie', '650', '2070', '318' UNION
+			SELECT 'Nowy Rejowiec Fabryczny', 'chełmski', 'lubelskie', '1428', '4417', '309' UNION
+			SELECT 'Nowy Resko', 'łobeski', 'zachodniopomorskie', '449', '4231', '942' UNION
+			SELECT 'Nowy Reszel', 'kętrzyński', 'warmińsko-mazurskie', '382', '4571', '1197' UNION
+			SELECT 'Nowy Rogoźno', 'obornicki', 'wielkopolskie', '1124', '11148', '992' UNION
+			SELECT 'Nowy Ropczyce', 'ropczycko-sędziszowski', 'podkarpackie', '4710', '15856', '337' UNION
+			SELECT 'Nowy Różan', 'makowski', 'mazowieckie', '666', '2727', '409' UNION
+			SELECT 'Nowy Ruciane-Nida', 'piski', 'warmińsko-mazurskie', '1707', '4474', '262' UNION
+			SELECT 'Nowy Ruda Śląska', 'Ruda Śląska[a]', 'śląskie', '7773', '138000', '1775' UNION
+			SELECT 'Nowy Rudnik nad Sanem', 'niżański', 'podkarpackie', '3660', '6726', '184' UNION
+			SELECT 'Nowy Rumia', 'wejherowski', 'pomorskie', '3010', '49031', '1629' UNION
+			SELECT 'Nowy Rybnik', 'Rybnik[a]', 'śląskie', '14836', '138696', '935' UNION
+			SELECT 'Nowy Rychwał', 'koniński', 'wielkopolskie', '970', '2391', '246' UNION
+			SELECT 'Nowy Rydułtowy', 'wodzisławski', 'śląskie', '1495', '21637', '1447' UNION
+			SELECT 'Nowy Rydzyna', 'leszczyński', 'wielkopolskie', '220', '2867', '1303' UNION
+			SELECT 'Nowy Ryglice', 'tarnowski', 'małopolskie', '2515', '2831', '113' UNION
+			SELECT 'Nowy Ryki', 'rycki', 'lubelskie', '2722', '9667', '355' UNION
+			SELECT 'Nowy Rymanów', 'krośnieński', 'podkarpackie', '1239', '3819', '308' UNION
+			SELECT 'Nowy Ryn', 'giżycki', 'warmińsko-mazurskie', '414', '2851', '689' UNION
+			SELECT 'Nowy Rypin', 'rypiński', 'kujawsko-pomorskie', '1096', '16354', '1492' UNION
+			SELECT 'Nowy Rzepin', 'słubicki', 'lubuskie', '1142', '6564', '575' UNION
+			SELECT 'Nowy Rzeszów', 'Rzeszów[a]', 'podkarpackie', '12661', '193883', '1531' UNION
+			SELECT 'Nowy Rzgów', 'łódzki wschodni', 'łódzkie', '1677', '3401', '203' UNION
+			SELECT 'Nowy Sandomierz', 'sandomierski', 'świętokrzyskie', '2869', '23644', '824' UNION
+			SELECT 'Nowy Sanniki', 'gostyniński', 'mazowieckie', '1176', '1983', '169' UNION
+			SELECT 'Nowy Sanok', 'sanocki', 'podkarpackie', '3808', '37577', '987' UNION
+			SELECT 'Nowy Sejny', 'sejneński', 'podlaskie', '449', '5344', '1190' UNION
+			SELECT 'Nowy Serock', 'legionowski', 'mazowieckie', '1343', '4416', '329' UNION
+			SELECT 'Nowy Sędziszów', 'jędrzejowski', 'świętokrzyskie', '792', '6484', '819' UNION
+			SELECT 'Nowy Sędziszów Małopolski', 'ropczycko-sędziszowski', 'podkarpackie', '3699', '12276', '332' UNION
+			SELECT 'Nowy Sępopol', 'bartoszycki', 'warmińsko-mazurskie', '463', '1964', '424' UNION
+			SELECT 'Nowy Sępólno Krajeńskie', 'sępoleński', 'kujawsko-pomorskie', '655', '9118', '1392' UNION
+			SELECT 'Nowy Sianów', 'koszaliński', 'zachodniopomorskie', '1588', '6664', '420' UNION
+			SELECT 'Nowy Siechnice', 'wrocławski', 'dolnośląskie', '1563', '7892', '505' UNION
+			SELECT 'Nowy Siedlce', 'Siedlce[a]', 'mazowieckie', '3186', '77872', '2444' UNION
+			SELECT 'Nowy Siedliszcze', 'chełmski', 'lubelskie', '1316', '1412', '107' UNION
+			SELECT 'Nowy Siemianowice Śląskie', 'Siemianowice Śląskie[a]', 'śląskie', '2550', '67154', '2633' UNION
+			SELECT 'Nowy Siemiatycze', 'siemiatycki', 'podlaskie', '3625', '14505', '400' UNION
+			SELECT 'Nowy Sieniawa', 'przeworski', 'podkarpackie', '674', '2140', '318' UNION
+			SELECT 'Nowy Sieradz', 'sieradzki', 'łódzkie', '5122', '42267', '825' UNION
+			SELECT 'Nowy Sieraków', 'międzychodzki', 'wielkopolskie', '1408', '6056', '430' UNION
+			SELECT 'Nowy Sierpc', 'sierpecki', 'mazowieckie', '1859', '18014', '969' UNION
+			SELECT 'Nowy Siewierz', 'będziński', 'śląskie', '3866', '5592', '145' UNION
+			SELECT 'Nowy Skalbmierz', 'kazimierski', 'świętokrzyskie', '713', '1289', '181' UNION
+			SELECT 'Nowy Skała', 'krakowski', 'małopolskie', '297', '3803', '1280' UNION
+			SELECT 'Nowy Skarszewy', 'starogardzki', 'pomorskie', '1079', '7023', '651' UNION
+			SELECT 'Nowy Skaryszew', 'radomski', 'mazowieckie', '2749', '4376', '159' UNION
+			SELECT 'Nowy Skarżysko-Kamienna', 'skarżyski', 'świętokrzyskie', '6439', '45358', '704' UNION
+			SELECT 'Nowy Skawina', 'krakowski', 'małopolskie', '2050', '24362', '1188' UNION
+			SELECT 'Nowy Skępe', 'lipnowski', 'kujawsko-pomorskie', '748', '3603', '482' UNION
+			SELECT 'Nowy Skierniewice', 'Skierniewice[a]', 'łódzkie', '3460', '48178', '1392' UNION
+			SELECT 'Nowy Skoczów', 'cieszyński', 'śląskie', '985', '14469', '1469' UNION
+			SELECT 'Nowy Skoki', 'wągrowiecki', 'wielkopolskie', '1120', '4346', '388' UNION
+			SELECT 'Nowy Skórcz', 'starogardzki', 'pomorskie', '363', '3611', '995' UNION
+			SELECT 'Nowy Skwierzyna', 'międzyrzecki', 'lubuskie', '3589', '9698', '270' UNION
+			SELECT 'Nowy Sława', 'wschowski', 'lubuskie', '1490', '4316', '290' UNION
+			SELECT 'Nowy Sławków', 'będziński', 'śląskie', '3667', '7043', '192' UNION
+			SELECT 'Nowy Sławno', 'sławieński', 'zachodniopomorskie', '1583', '12528', '791' UNION
+			SELECT 'Nowy Słomniki', 'krakowski', 'małopolskie', '343', '4348', '1268' UNION
+			SELECT 'Nowy Słubice', 'słubicki', 'lubuskie', '1921', '16773', '873' UNION
+			SELECT 'Nowy Słupca', 'słupecki', 'wielkopolskie', '1030', '13773', '1337' UNION
+			SELECT 'Nowy Słupsk', 'Słupsk[a]', 'pomorskie', '4315', '91007', '2109' UNION
+			SELECT 'Nowy Sobótka', 'wrocławski', 'dolnośląskie', '3220', '6957', '216' UNION
+			SELECT 'Nowy Sochaczew', 'sochaczewski', 'mazowieckie', '2619', '36462', '1392' UNION
+			SELECT 'Nowy Sokołów Małopolski', 'rzeszowski', 'podkarpackie', '1554', '4165', '268' UNION
+			SELECT 'Nowy Sokołów Podlaski', 'sokołowski', 'mazowieckie', '1751', '18939', '1082' UNION
+			SELECT 'Nowy Sokółka', 'sokólski', 'podlaskie', '1859', '18210', '980' UNION
+			SELECT 'Nowy Solec Kujawski', 'bydgoski', 'kujawsko-pomorskie', '1868', '15641', '837' UNION
+			SELECT 'Nowy Sompolno', 'koniński', 'wielkopolskie', '621', '3552', '572' UNION
+			SELECT 'Nowy Sopot', 'Sopot[a]', 'pomorskie', '1728', '36046', '2086' UNION
+			SELECT 'Nowy Sosnowiec', 'Sosnowiec[a]', 'śląskie', '9106', '202036', '2219' UNION
+			SELECT 'Nowy Sośnicowice', 'gliwicki', 'śląskie', '1167', '1906', '163' UNION
+			SELECT 'Nowy Stalowa Wola', 'stalowowolski', 'podkarpackie', '8252', '61182', '741' UNION
+			SELECT 'Nowy Starachowice', 'starachowicki', 'świętokrzyskie', '3182', '48965', '1539' UNION
+			SELECT 'Nowy Stargard', 'stargardzki', 'zachodniopomorskie', '4808', '67938', '1413' UNION
+			SELECT 'Nowy Starogard Gdański', 'starogardzki', 'pomorskie', '2528', '47776', '1890' UNION
+			SELECT 'Nowy Stary Sącz', 'nowosądecki', 'małopolskie', '1500', '9048', '603' UNION
+			SELECT 'Nowy Staszów', 'staszowski', 'świętokrzyskie', '2688', '14810', '551' UNION
+			SELECT 'Nowy Stawiski', 'kolneński', 'podlaskie', '1324', '2195', '166' UNION
+			SELECT 'Nowy Stawiszyn', 'kaliski', 'wielkopolskie', '99', '1526', '1541' UNION
+			SELECT 'Nowy Stąporków', 'konecki', 'świętokrzyskie', '1094', '5679', '519' UNION
+			SELECT 'Nowy Stepnica', 'goleniowski', 'zachodniopomorskie', '340', '2471', '727' UNION
+			SELECT 'Nowy Stęszew', 'poznański', 'wielkopolskie', '569', '5931', '1042' UNION
+			SELECT 'Nowy Stoczek Łukowski', 'łukowski', 'lubelskie', '915', '2536', '277' UNION
+			SELECT 'Nowy Stopnica', 'buski', 'świętokrzyskie', '455', '1425', '313' UNION
+			SELECT 'Nowy Stronie Śląskie', 'kłodzki', 'dolnośląskie', '238', '5741', '2412' UNION
+			SELECT 'Nowy Strumień', 'cieszyński', 'śląskie', '629', '3680', '585' UNION
+			SELECT 'Nowy Stryków', 'zgierski', 'łódzkie', '815', '3494', '429' UNION
+			SELECT 'Nowy Strzegom', 'świdnicki', 'dolnośląskie', '2049', '16153', '788' UNION
+			SELECT 'Nowy Strzelce Krajeńskie', 'strzelecko-drezdenecki', 'lubuskie', '554', '9969', '1799' UNION
+			SELECT 'Nowy Strzelce Opolskie', 'strzelecki', 'opolskie', '2997', '17982', '600' UNION
+			SELECT 'Nowy Strzelin', 'strzeliński', 'dolnośląskie', '1034', '12435', '1203' UNION
+			SELECT 'Nowy Strzelno', 'mogileński', 'kujawsko-pomorskie', '446', '5663', '1270' UNION
+			SELECT 'Nowy Strzyżów', 'strzyżowski', 'podkarpackie', '1389', '8902', '641' UNION
+			SELECT 'Nowy Sucha Beskidzka', 'suski', 'małopolskie', '2765', '9165', '331' UNION
+			SELECT 'Nowy Suchań', 'stargardzki', 'zachodniopomorskie', '357', '1477', '414' UNION
+			SELECT 'Nowy Suchedniów', 'skarżyski', 'świętokrzyskie', '5940', '8379', '141' UNION
+			SELECT 'Nowy Suchowola', 'sokólski', 'podlaskie', '2595', '2180', '84' UNION
+			SELECT 'Nowy Sulechów', 'zielonogórski', 'lubuskie', '688', '16925', '2460' UNION
+			SELECT 'Nowy Sulejów', 'piotrkowski', 'łódzkie', '2626', '6204', '236' UNION
+			SELECT 'Nowy Sulejówek', 'miński', 'mazowieckie', '1931', '19714', '1021' UNION
+			SELECT 'Nowy Sulęcin', 'sulęciński', 'lubuskie', '856', '10157', '1187' UNION
+			SELECT 'Nowy Sulmierzyce', 'krotoszyński', 'wielkopolskie', '2929', '2887', '99' UNION
+			SELECT 'Nowy Sułkowice', 'myślenicki', 'małopolskie', '1646', '6633', '403' UNION
+			SELECT 'Nowy Supraśl', 'białostocki', 'podlaskie', '569', '4622', '812' UNION
+			SELECT 'Nowy Suraż', 'białostocki', 'podlaskie', '3386', '988', '29' UNION
+			SELECT 'Nowy Susz', 'iławski', 'warmińsko-mazurskie', '667', '5571', '835' UNION
+			SELECT 'Nowy Suwałki', 'Suwałki[a]', 'podlaskie', '6551', '69827', '1066' UNION
+			SELECT 'Nowy Swarzędz', 'poznański', 'wielkopolskie', '823', '30433', '3698' UNION
+			SELECT 'Nowy Syców', 'oleśnicki', 'dolnośląskie', '1705', '10420', '611' UNION
+			SELECT 'Nowy Szadek', 'zduńskowolski', 'łódzkie', '1793', '1917', '107' UNION
+			SELECT 'Nowy Szamocin', 'chodzieski', 'wielkopolskie', '467', '4222', '904' UNION
+			SELECT 'Nowy Szamotuły', 'szamotulski', 'wielkopolskie', '1108', '18776', '1695' UNION
+			SELECT 'Nowy Szczawnica', 'nowotarski', 'małopolskie', '3290', '5776', '176' UNION
+			SELECT 'Nowy Szczawno-Zdrój', 'wałbrzyski', 'dolnośląskie', '1474', '5608', '380' UNION
+			SELECT 'Nowy Szczebrzeszyn', 'zamojski', 'lubelskie', '2912', '5040', '173' UNION
+			SELECT 'Nowy Szczecin', 'Szczecin[a]', 'zachodniopomorskie', '30060', '402465', '1339' UNION
+			SELECT 'Nowy Szczecinek', 'szczecinecki', 'zachodniopomorskie', '4848', '40114', '827' UNION
+			SELECT 'Nowy Szczekociny', 'zawierciański', 'śląskie', '1803', '3622', '201' UNION
+			SELECT 'Nowy Szczucin', 'dąbrowski', 'małopolskie', '685', '4173', '609' UNION
+			SELECT 'Nowy Szczuczyn', 'grajewski', 'podlaskie', '1323', '3394', '257' UNION
+			SELECT 'Nowy Szczyrk', 'bielski', 'śląskie', '3907', '5747', '147' UNION
+			SELECT 'Nowy Szczytna', 'kłodzki', 'dolnośląskie', '8038', '5163', '64' UNION
+			SELECT 'Nowy Szczytno', 'szczycieński', 'warmińsko-mazurskie', '1062', '23343', '2198' UNION
+			SELECT 'Nowy Szepietowo', 'wysokomazowiecki', 'podlaskie', '196', '2171', '1108' UNION
+			SELECT 'Nowy Szklarska Poręba', 'jeleniogórski', 'dolnośląskie', '7544', '6611', '88' UNION
+			SELECT 'Nowy Szlichtyngowa', 'wschowski', 'lubuskie', '155', '1288', '831' UNION
+			SELECT 'Nowy Szprotawa', 'żagański', 'lubuskie', '1095', '11912', '1088' UNION
+			SELECT 'Nowy Sztum', 'sztumski', 'pomorskie', '459', '9990', '2176' UNION
+			SELECT 'Nowy Szubin', 'nakielski', 'kujawsko-pomorskie', '765', '9576', '1252' UNION
+			SELECT 'Nowy Szydłowiec', 'szydłowiecki', 'mazowieckie', '2189', '11779', '538' UNION
+			SELECT 'Nowy Szydłów', 'staszowski', 'świętokrzyskie', '1621', '1106', '68' UNION
+			SELECT 'Nowy Ścinawa', 'lubiński', 'dolnośląskie', '1354', '5589', '413' UNION
+			SELECT 'Nowy Ślesin', 'koniński', 'wielkopolskie', '718', '3151', '439' UNION
+			SELECT 'Nowy Śmigiel', 'kościański', 'wielkopolskie', '530', '5703', '1076' UNION
+			SELECT 'Nowy Śrem', 'śremski', 'wielkopolskie', '1237', '29714', '2402' UNION
+			SELECT 'Nowy Środa Śląska', 'średzki', 'dolnośląskie', '1494', '9484', '635' UNION
+			SELECT 'Nowy Środa Wielkopolska', 'średzki', 'wielkopolskie', '2192', '23312', '1064' UNION
+			SELECT 'Nowy Świątniki Górne', 'krakowski', 'małopolskie', '444', '2415', '544' UNION
+			SELECT 'Nowy Świdnica', 'świdnicki', 'dolnośląskie', '2176', '57310', '2634' UNION
+			SELECT 'Nowy Świdnik', 'świdnicki', 'lubelskie', '2035', '39312', '1932' UNION
+			SELECT 'Nowy Świdwin', 'świdwiński', 'zachodniopomorskie', '2238', '15594', '697' UNION
+			SELECT 'Nowy Świebodzice', 'świdnicki', 'dolnośląskie', '3043', '22830', '750' UNION
+			SELECT 'Nowy Świebodzin', 'świebodziński', 'lubuskie', '1693', '21763', '1285' UNION
+			SELECT 'Nowy Świecie', 'świecki', 'kujawsko-pomorskie', '1187', '25831', '2176' UNION
+			SELECT 'Nowy Świeradów-Zdrój', 'lubański', 'dolnośląskie', '2072', '4183', '202' UNION
+			SELECT 'Nowy Świerzawa', 'złotoryjski', 'dolnośląskie', '176', '2291', '1302' UNION
+			SELECT 'Nowy Świętochłowice', 'Świętochłowice[a]', 'śląskie', '1331', '50012', '3757' UNION
+			SELECT 'Nowy Świnoujście', 'Świnoujście[a]', 'zachodniopomorskie', '20207', '40910', '202' UNION
+			SELECT 'Nowy Tarczyn', 'piaseczyński', 'mazowieckie', '523', '4129', '789' UNION
+			SELECT 'Nowy Tarnobrzeg', 'Tarnobrzeg[a]', 'podkarpackie', '8540', '47047', '551' UNION
+			SELECT 'Nowy Tarnogród', 'biłgorajski', 'lubelskie', '1069', '3351', '313' UNION
+			SELECT 'Nowy Tarnowskie Góry', 'tarnogórski', 'śląskie', '8388', '61361', '732' UNION
+			SELECT 'Nowy Tarnów', 'Tarnów[a]', 'małopolskie', '7238', '109062', '1507' UNION
+			SELECT 'Nowy Tczew', 'tczewski', 'pomorskie', '2238', '60279', '2693' UNION
+			SELECT 'Nowy Terespol', 'bialski', 'lubelskie', '1011', '5557', '550' UNION
+			SELECT 'Nowy Tłuszcz', 'wołomiński', 'mazowieckie', '791', '8157', '1031' UNION
+			SELECT 'Nowy Tolkmicko', 'elbląski', 'warmińsko-mazurskie', '229', '2692', '1176' UNION
+			SELECT 'Nowy Tomaszów Lubelski', 'tomaszowski', 'lubelskie', '1329', '19198', '1445' UNION
+			SELECT 'Nowy Tomaszów Mazowiecki', 'tomaszowski', 'łódzkie', '4130', '62649', '1517' UNION
+			SELECT 'Nowy Toruń', 'Toruń[a]', 'kujawsko-pomorskie', '11572', '202074', '1746' UNION
+			SELECT 'Nowy Torzym', 'sulęciński', 'lubuskie', '911', '2524', '277' UNION
+			SELECT 'Nowy Toszek', 'gliwicki', 'śląskie', '971', '3595', '370' UNION
+			SELECT 'Nowy Trzcianka', 'czarnkowsko-trzcianecki', 'wielkopolskie', '1830', '17197', '940' UNION
+			SELECT 'Nowy Trzciel', 'międzyrzecki', 'lubuskie', '304', '2389', '786' UNION
+			SELECT 'Nowy Trzcińsko-Zdrój', 'gryfiński', 'zachodniopomorskie', '233', '2273', '976' UNION
+			SELECT 'Nowy Trzebiatów', 'gryficki', 'zachodniopomorskie', '1025', '10009', '976' UNION
+			SELECT 'Nowy Trzebinia', 'chrzanowski', 'małopolskie', '3194', '19846', '621' UNION
+			SELECT 'Nowy Trzebnica', 'trzebnicki', 'dolnośląskie', '1061', '13322', '1256' UNION
+			SELECT 'Nowy Trzemeszno', 'gnieźnieński', 'wielkopolskie', '546', '7670', '1405' UNION
+			SELECT 'Nowy Tuchola', 'tucholski', 'kujawsko-pomorskie', '1769', '13680', '773' UNION
+			SELECT 'Nowy Tuchów', 'tarnowski', 'małopolskie', '1810', '6671', '369' UNION
+			SELECT 'Nowy Tuczno', 'wałecki', 'zachodniopomorskie', '921', '1916', '208' UNION
+			SELECT 'Nowy Tuliszków', 'turecki', 'wielkopolskie', '700', '3270', '467' UNION
+			SELECT 'Nowy Tułowice', 'opolski', 'opolskie', '923', '3998', '433' UNION
+			SELECT 'Nowy Turek', 'turecki', 'wielkopolskie', '1617', '27109', '1676' UNION
+			SELECT 'Nowy Tuszyn', 'łódzki wschodni', 'łódzkie', '2325', '7292', '314' UNION
+			SELECT 'Nowy Twardogóra', 'oleśnicki', 'dolnośląskie', '829', '6716', '810' UNION
+			SELECT 'Nowy Tychowo', 'białogardzki', 'zachodniopomorskie', '396', '2517', '636' UNION
+			SELECT 'Nowy Tychy', 'Tychy[a]', 'śląskie', '8181', '127831', '1563' UNION
+			SELECT 'Nowy Tyczyn', 'rzeszowski', 'podkarpackie', '967', '3816', '395' UNION
+			SELECT 'Nowy Tykocin', 'białostocki', 'podlaskie', '2897', '1975', '68' UNION
+			SELECT 'Nowy Tyszowce', 'tomaszowski', 'lubelskie', '1852', '2132', '115' UNION
+			SELECT 'Nowy Ujazd', 'strzelecki', 'opolskie', '1476', '1774', '120' UNION
+			SELECT 'Nowy Ujście', 'pilski', 'wielkopolskie', '578', '3697', '640' UNION
+			SELECT 'Nowy Ulanów', 'niżański', 'podkarpackie', '820', '1424', '174' UNION
+			SELECT 'Nowy Uniejów', 'poddębicki', 'łódzkie', '1223', '2984', '244' UNION
+			SELECT 'Nowy Urzędów', 'kraśnicki', 'lubelskie', '1291', '1709', '132' UNION
+			SELECT 'Nowy Ustka', 'słupski', 'pomorskie', '1019', '15527', '1524' UNION
+			SELECT 'Nowy Ustroń', 'cieszyński', 'śląskie', '5903', '16054', '272' UNION
+			SELECT 'Nowy Ustrzyki Dolne', 'bieszczadzki', 'podkarpackie', '1679', '9132', '544' UNION
+			SELECT 'Nowy Wadowice', 'wadowicki', 'małopolskie', '1054', '18774', '1781' UNION
+			SELECT 'Nowy Wałbrzych', 'Wałbrzych[a]', 'dolnośląskie', '8470', '112594', '1329' UNION
+			SELECT 'Nowy Wałcz', 'wałecki', 'zachodniopomorskie', '3817', '25359', '664' UNION
+			SELECT 'Nowy Warka', 'grójecki', 'mazowieckie', '2677', '11926', '445' UNION
+			SELECT 'Nowy Warszawa', 'm.st. Warszawa[a]', 'mazowieckie', '51724', '1777972', '3437' UNION
+			SELECT 'Nowy Warta', 'sieradzki', 'łódzkie', '1085', '3263', '301' UNION
+			SELECT 'Nowy Wasilków', 'białostocki', 'podlaskie', '2826', '11384', '403' UNION
+			SELECT 'Nowy Wąbrzeźno', 'wąbrzeski', 'kujawsko-pomorskie', '853', '13605', '1595' UNION
+			SELECT 'Nowy Wąchock', 'starachowicki', 'świętokrzyskie', '1602', '2764', '173' UNION
+			SELECT 'Nowy Wągrowiec', 'wągrowiecki', 'wielkopolskie', '1783', '25648', '1438' UNION
+			SELECT 'Nowy Wąsosz', 'górowski', 'dolnośląskie', '324', '2672', '825' UNION
+			SELECT 'Nowy Wejherowo', 'wejherowski', 'pomorskie', '2699', '49789', '1845' UNION
+			SELECT 'Nowy Węgliniec', 'zgorzelecki', 'dolnośląskie', '873', '2860', '328' UNION
+			SELECT 'Nowy Węgorzewo', 'węgorzewski', 'warmińsko-mazurskie', '1088', '11341', '1042' UNION
+			SELECT 'Nowy Węgorzyno', 'łobeski', 'zachodniopomorskie', '685', '2831', '413' UNION
+			SELECT 'Nowy Węgrów', 'węgrowski', 'mazowieckie', '3551', '12672', '357' UNION
+			SELECT 'Nowy Wiązów', 'strzeliński', 'dolnośląskie', '916', '2257', '246' UNION
+			SELECT 'Nowy Wielbark', 'szczycieński', 'warmińsko-mazurskie', '1842', '3049', '166' UNION
+			SELECT 'Nowy Wieleń', 'czarnkowsko-trzcianecki', 'wielkopolskie', '446', '5919', '1327' UNION
+			SELECT 'Nowy Wielichowo', 'grodziski', 'wielkopolskie', '124', '1767', '1425' UNION
+			SELECT 'Nowy Wieliczka', 'wielicki', 'małopolskie', '1341', '23395', '1745' UNION
+			SELECT 'Nowy Wieluń', 'wieluński', 'łódzkie', '1687', '22521', '1335' UNION
+			SELECT 'Nowy Wieruszów', 'wieruszowski', 'łódzkie', '597', '8568', '1435' UNION
+			SELECT 'Nowy Więcbork', 'sępoleński', 'kujawsko-pomorskie', '431', '5966', '1384' UNION
+			SELECT 'Nowy Wilamowice', 'bielski', 'śląskie', '1036', '3086', '298' UNION
+			SELECT 'Nowy Wisła', 'cieszyński', 'śląskie', '11017', '11171', '101' UNION
+			SELECT 'Nowy Wiślica', 'buski', 'świętokrzyskie', '471', '515', '109' UNION
+			SELECT 'Nowy Witkowo', 'gnieźnieński', 'wielkopolskie', '831', '7893', '950' UNION
+			SELECT 'Nowy Witnica', 'gorzowski', 'lubuskie', '824', '6763', '821' UNION
+			SELECT 'Nowy Wleń', 'lwówecki', 'dolnośląskie', '722', '1778', '246' UNION
+			SELECT 'Nowy Władysławowo', 'pucki', 'pomorskie', '1367', '9958', '728' UNION
+			SELECT 'Nowy Włocławek', 'Włocławek[a]', 'kujawsko-pomorskie', '8432', '110802', '1314' UNION
+			SELECT 'Nowy Włodawa', 'włodawski', 'lubelskie', '1797', '13220', '736' UNION
+			SELECT 'Nowy Włoszczowa', 'włoszczowski', 'świętokrzyskie', '3030', '10043', '331' UNION
+			SELECT 'Nowy Wodzisław Śląski', 'wodzisławski', 'śląskie', '4951', '48143', '972' UNION
+			SELECT 'Nowy Wojcieszów', 'złotoryjski', 'dolnośląskie', '3217', '3676', '114' UNION
+			SELECT 'Nowy Wojkowice', 'będziński', 'śląskie', '1279', '8936', '699' UNION
+			SELECT 'Nowy Wojnicz', 'tarnowski', 'małopolskie', '850', '3330', '392' UNION
+			SELECT 'Nowy Wolbórz', 'piotrkowski', 'łódzkie', '1518', '2337', '154' UNION
+			SELECT 'Nowy Wolbrom', 'olkuski', 'małopolskie', '1012', '8604', '850' UNION
+			SELECT 'Nowy Wolin', 'kamieński', 'zachodniopomorskie', '1447', '4828', '334' UNION
+			SELECT 'Nowy Wolsztyn', 'wolsztyński', 'wielkopolskie', '478', '13183', '2758' UNION
+			SELECT 'Nowy Wołczyn', 'kluczborski', 'opolskie', '747', '5921', '793' UNION
+			SELECT 'Nowy Wołomin', 'wołomiński', 'mazowieckie', '1724', '37138', '2154' UNION
+			SELECT 'Nowy Wołów', 'wołowski', 'dolnośląskie', '1854', '12425', '670' UNION
+			SELECT 'Nowy Woźniki', 'lubliniecki', 'śląskie', '7101', '4338', '61' UNION
+			SELECT 'Nowy Wrocław', 'Wrocław[a]', 'dolnośląskie', '29282', '640648', '2188' UNION
+			SELECT 'Nowy Wronki', 'szamotulski', 'wielkopolskie', '581', '11199', '1928' UNION
+			SELECT 'Nowy Września', 'wrzesiński', 'wielkopolskie', '1273', '30558', '2400' UNION
+			SELECT 'Nowy Wschowa', 'wschowski', 'lubuskie', '925', '13953', '1508' UNION
+			SELECT 'Nowy Wyrzysk', 'pilski', 'wielkopolskie', '412', '5139', '1247' UNION
+			SELECT 'Nowy Wysoka', 'pilski', 'wielkopolskie', '482', '2647', '549' UNION
+			SELECT 'Nowy Wysokie Mazowieckie', 'wysokomazowiecki', 'podlaskie', '1524', '9414', '618' UNION
+			SELECT 'Nowy Wyszków', 'wyszkowski', 'mazowieckie', '2078', '26890', '1294' UNION
+			SELECT 'Nowy Wyszogród', 'płocki', 'mazowieckie', '1297', '2618', '202' UNION
+			SELECT 'Nowy Wyśmierzyce', 'białobrzeski', 'mazowieckie', '1684', '886', '53' UNION
+			SELECT 'Nowy Zabłudów', 'białostocki', 'podlaskie', '1430', '2464', '172' UNION
+			SELECT 'Nowy Zabrze', 'Zabrze[a]', 'śląskie', '8040', '173374', '2156' UNION
+			SELECT 'Nowy Zagórów', 'słupecki', 'wielkopolskie', '344', '3005', '874' UNION
+			SELECT 'Nowy Zagórz', 'sanocki', 'podkarpackie', '2229', '5120', '230' UNION
+			SELECT 'Nowy Zakliczyn', 'tarnowski', 'małopolskie', '402', '1642', '408' UNION
+			SELECT 'Nowy Zaklików', 'stalowowolski', 'podkarpackie', '1142', '3013', '264' UNION
+			SELECT 'Nowy Zakopane', 'tatrzański', 'małopolskie', '8426', '27191', '323' UNION
+			SELECT 'Nowy Zakroczym', 'nowodworski', 'mazowieckie', '1997', '3210', '161' UNION
+			SELECT 'Nowy Zalewo', 'iławski', 'warmińsko-mazurskie', '822', '2165', '263' UNION
+			SELECT 'Nowy Zambrów', 'zambrowski', 'podlaskie', '1902', '22166', '1165' UNION
+			SELECT 'Nowy Zamość', 'Zamość[a]', 'lubelskie', '3034', '63813', '2103' UNION
+			SELECT 'Nowy Zator', 'oświęcimski', 'małopolskie', '1152', '3698', '321' UNION
+			SELECT 'Nowy Zawadzkie', 'strzelecki', 'opolskie', '1646', '7168', '435' UNION
+			SELECT 'Nowy Zawichost', 'sandomierski', 'świętokrzyskie', '2029', '1776', '88' UNION
+			SELECT 'Nowy Zawidów', 'zgorzelecki', 'dolnośląskie', '607', '4217', '695' UNION
+			SELECT 'Nowy Zawiercie', 'zawierciański', 'śląskie', '8525', '49567', '581' UNION
+			SELECT 'Nowy Ząbki', 'wołomiński', 'mazowieckie', '1098', '36706', '3343' UNION
+			SELECT 'Nowy Ząbkowice Śląskie', 'ząbkowicki', 'dolnośląskie', '1367', '15072', '1103' UNION
+			SELECT 'Nowy Zbąszynek', 'świebodziński', 'lubuskie', '358', '5021', '1403' UNION
+			SELECT 'Nowy Zbąszyń', 'nowotomyski', 'wielkopolskie', '542', '7278', '1343' UNION
+			SELECT 'Nowy Zduny', 'krotoszyński', 'wielkopolskie', '620', '4534', '731' UNION
+			SELECT 'Nowy Zduńska Wola', 'zduńskowolski', 'łódzkie', '2457', '42094', '1713' UNION
+			SELECT 'Nowy Zdzieszowice', 'krapkowicki', 'opolskie', '1235', '11471', '929' UNION
+			SELECT 'Nowy Zelów', 'bełchatowski', 'łódzkie', '1075', '7636', '710' UNION
+			SELECT 'Nowy Zgierz', 'zgierski', 'łódzkie', '4233', '56529', '1335' UNION
+			SELECT 'Nowy Zgorzelec', 'zgorzelecki', 'dolnośląskie', '1588', '30521', '1922' UNION
+			SELECT 'Nowy Zielona Góra', 'Zielona Góra[a]', 'lubuskie', '27832', '140297', '504' UNION
+			SELECT 'Nowy Zielonka', 'wołomiński', 'mazowieckie', '7948', '17589', '221' UNION
+			SELECT 'Nowy Ziębice', 'ząbkowicki', 'dolnośląskie', '1507', '8759', '581' UNION
+			SELECT 'Nowy Złocieniec', 'drawski', 'zachodniopomorskie', '3228', '12950', '401' UNION
+			SELECT 'Nowy Złoczew', 'sieradzki', 'łódzkie', '1379', '3384', '245' UNION
+			SELECT 'Nowy Złotoryja', 'złotoryjski', 'dolnośląskie', '1151', '15655', '1360' UNION
+			SELECT 'Nowy Złotów', 'złotowski', 'wielkopolskie', '1158', '18446', '1593' UNION
+			SELECT 'Nowy Złoty Stok', 'ząbkowicki', 'dolnośląskie', '773', '2787', '361' UNION
+			SELECT 'Nowy Zwierzyniec', 'zamojski', 'lubelskie', '619', '3194', '516' UNION
+			SELECT 'Nowy Zwoleń', 'zwoleński', 'mazowieckie', '1591', '7737', '486' UNION
+			SELECT 'Nowy Żabno', 'tarnowski', 'małopolskie', '1113', '4248', '382' UNION
+			SELECT 'Nowy Żagań', 'żagański', 'lubuskie', '4038', '25812', '639' UNION
+			SELECT 'Nowy Żarki', 'myszkowski', 'śląskie', '2544', '4568', '180' UNION
+			SELECT 'Nowy Żarów', 'świdnicki', 'dolnośląskie', '757', '6755', '892' UNION
+			SELECT 'Nowy Żary', 'żarski', 'lubuskie', '3349', '37682', '1125' UNION
+			SELECT 'Nowy Żelechów', 'garwoliński', 'mazowieckie', '1213', '3995', '329' UNION
+			SELECT 'Nowy Żerków', 'jarociński', 'wielkopolskie', '216', '2132', '987' UNION
+			SELECT 'Nowy Żmigród', 'trzebnicki', 'dolnośląskie', '949', '6449', '680' UNION
+			SELECT 'Nowy Żnin', 'żniński', 'kujawsko-pomorskie', '835', '13934', '1669' UNION
+			SELECT 'Nowy Żory', 'Żory[a]', 'śląskie', '6464', '62456', '966' UNION
+			SELECT 'Nowy Żukowo', 'kartuski', 'pomorskie', '473', '6683', '1413' UNION
+			SELECT 'Nowy Żuromin', 'żuromiński', 'mazowieckie', '1118', '8901', '796' UNION
+			SELECT 'Nowy Żychlin', 'kutnowski', 'łódzkie', '868', '8220', '947' UNION
+			SELECT 'Nowy Żyrardów', 'żyrardowski', 'mazowieckie', '1435', '39992', '2787' UNION
+			SELECT 'Nowy Żywiec', 'żywiecki', 'śląskie', '5054', '31388', '621'
 		)
 		INSERT INTO [dbo].[Location]
 		(
