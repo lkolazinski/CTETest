@@ -79,6 +79,12 @@
     <Build Include="Functions\f_GetUsersCountForLocationId.sql" />
     <Build Include="Functions\ft_GetLocationCountForUserId.sql" />
     <Build Include="Procedures\User_GetFilteredMars.sql" />
+    <Build Include="Procedures\User_GetById.sql" />
+    <Build Include="Procedures\Department_GetById.sql" />
+    <Build Include="Procedures\Location_GetById.sql" />
+    <Build Include="Procedures\Region_GetById.sql" />
+    <Build Include="Procedures\Role_GetById.sql" />
+    <Build Include="Procedures\UserLocation_GetById.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />
