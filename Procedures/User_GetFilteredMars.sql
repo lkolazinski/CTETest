@@ -117,6 +117,22 @@ BEGIN
 	INNER JOIN [dbo].[Role] d ON d.[Id] = u.[RoleId]
 	--ORDER BY p.[RowOrder] ASC
 
+	SELECT
+		l.[Id],
+		l.[LocationNo],
+		l.[RegionId],
+		l.[Address1],
+		l.[Address2],
+		l.[Name],
+		l.[Province],
+		l.[Site],
+		l.[CreationDate],
+		l.[ModificationDate]		
+	FROM @KeysTable p
+	INNER JOIN [dbo].[User] u ON u.[Id] = p.[Id]
+	INNER JOIN [dbo].[Location] l ON l.[Id] = u.[LocationId]
+	--ORDER BY p.[RowOrder] ASC
+
 END
 
 
