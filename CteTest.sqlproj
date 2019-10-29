@@ -93,6 +93,11 @@
     <Build Include="Procedures\Region_Insert.sql" />
     <Build Include="Procedures\User_Insert.sql" />
     <Build Include="Procedures\UserLocation_Insert.sql" />
+    <Build Include="Procedures\Department_Update.sql" />
+    <Build Include="Procedures\Location_Update.sql" />
+    <Build Include="Procedures\Region_Update.sql" />
+    <Build Include="Procedures\Role_Update.sql" />
+    <Build Include="Procedures\User_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />

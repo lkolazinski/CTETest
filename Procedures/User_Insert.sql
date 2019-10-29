@@ -36,5 +36,4 @@ BEGIN
 		@UserNo
 
 	EXEC [dbo].[User_GetById] @@IDENTITY
-		
 END
