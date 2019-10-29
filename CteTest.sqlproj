@@ -85,6 +85,14 @@
     <Build Include="Procedures\Region_GetById.sql" />
     <Build Include="Procedures\Role_GetById.sql" />
     <Build Include="Procedures\UserLocation_GetById.sql" />
+    <Build Include="Procedures\Role_Insert.sql" />
+    <Build Include="Procedures\Department_Insert.sql" />
+    <Build Include="Procedures\Location_Insert.sql" />
+    <Build Include="Procedures\Logs_GetById.sql" />
+    <Build Include="Procedures\Logs_Insert.sql" />
+    <Build Include="Procedures\Region_Insert.sql" />
+    <Build Include="Procedures\User_Insert.sql" />
+    <Build Include="Procedures\UserLocation_Insert.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />
