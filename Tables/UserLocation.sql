@@ -10,3 +10,7 @@
 GO
 
 CREATE UNIQUE INDEX [IX_UserLocation_UserIdLocationId] ON [dbo].[UserLocation] ([UserId], [LocationId])
+GO
+
+CREATE NONCLUSTERED INDEX [IX_UserLocation_LocationId] ON [dbo].[UserLocation] ([LocationId])
+GO

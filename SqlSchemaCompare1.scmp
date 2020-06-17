@@ -9,7 +9,7 @@
   </SourceModelProvider>
   <TargetModelProvider>
     <ConnectionBasedModelProvider>
-      <ConnectionString>Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CTETest;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</ConnectionString>
+      <ConnectionString>Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=CTETest;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</ConnectionString>
     </ConnectionBasedModelProvider>
   </TargetModelProvider>
   <SchemaCompareSettingsService>
@@ -298,11 +298,11 @@
       </PropertyElementName>
       <PropertyElementName>
         <Name>TargetDatabaseName</Name>
-        <Value>CteTest</Value>
+        <Value>CTETest</Value>
       </PropertyElementName>
       <PropertyElementName>
         <Name>TargetConnectionString</Name>
-        <Value>Integrated Security=True;Pooling=False;Connect Timeout=30</Value>
+        <Value>Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=CTETest;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;Application Name="Microsoft SQL Server Data Tools, Schema Compare"</Value>
       </PropertyElementName>
       <PropertyElementName>
         <Name>TreatVerificationErrorsAsWarnings</Name>
@@ -434,10 +434,6 @@
       </PropertyElementName>
       <PropertyElementName>
         <Name>DoNotDropFilegroups</Name>
-        <Value>False</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>DoNotDropFiles</Name>
         <Value>False</Value>
       </PropertyElementName>
       <PropertyElementName>
@@ -683,10 +679,6 @@
       <PropertyElementName>
         <Name>ExcludeFilegroups</Name>
         <Value>False</Value>
-      </PropertyElementName>
-      <PropertyElementName>
-        <Name>ExcludeFiles</Name>
-        <Value>True</Value>
       </PropertyElementName>
       <PropertyElementName>
         <Name>ExcludeFileTables</Name>

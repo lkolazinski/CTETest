@@ -63,6 +63,7 @@
     <Folder Include="Functions" />
     <Folder Include="Scripts\Imports" />
     <Folder Include="Tests" />
+    <Folder Include="Pic" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\User.sql" />
@@ -73,12 +74,7 @@
     <Build Include="Tables\Region.sql" />
     <Build Include="Tables\Department.sql" />
     <Build Include="Tables\Logs.sql" />
-    <Build Include="Functions\ft_UserGetNextUserNo.sql" />
-    <Build Include="Functions\ft_UserGetNextUserNoWithBody.sql" />
     <Build Include="Procedures\User_GetFiltred.sql" />
-    <Build Include="Functions\f_GetLocationCountForUserId.sql" />
-    <Build Include="Functions\f_GetUsersCountForLocationId.sql" />
-    <Build Include="Functions\ft_GetLocationCountForUserId.sql" />
     <Build Include="Procedures\User_GetFilteredMars.sql" />
     <Build Include="Procedures\User_GetById.sql" />
     <Build Include="Procedures\Department_GetById.sql" />
@@ -100,6 +96,13 @@
     <Build Include="Procedures\Role_Update.sql" />
     <Build Include="Procedures\User_Update.sql" />
     <Build Include="Procedures\User_GetFiltredByXml.sql" />
+    <Build Include="Procedures\User_GetFiltredScalar.sql" />
+    <Build Include="Functions\f_GetLocationCountForUserId.sql" />
+    <Build Include="Functions\f_GetUsersCountForLocationId.sql" />
+    <Build Include="Functions\ft_GetLocationCountForUserId.sql" />
+    <Build Include="Functions\ft_UserGetNextUserNo.sql" />
+    <Build Include="Functions\ft_UserGetNextUserNoWithBody.sql" />
+    <Build Include="Functions\ft_GetUsersCountForLocationId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />
@@ -109,6 +112,13 @@
     <None Include="Tests\ExecuteByTVPParam.sql" />
     <None Include="Tests\Convert_ImplicitCardinale.sql" />
     <None Include="Tests\ScalarVsTableFunction.sql" />
+    <None Include="Pic\diff.png" />
+    <None Include="Pic\same.png" />
+    <None Include="Pic\TABLE_VS_SCALAR.png" />
+    <None Include="Pic\TABLE_VS_SCALAR_2.png" />
+    <None Include="Pic\FScalar.png" />
+    <None Include="Pic\FTable.png" />
+    <None Include="Pic\TABLE_VS_SCALAR_3.png" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CteTest.refactorlog" />
