@@ -108,6 +108,7 @@
     <None Include="Tests\ExecuteByXmlParams.sql" />
     <None Include="Tests\ExecuteByTVPParam.sql" />
     <None Include="Tests\Convert_ImplicitCardinale.sql" />
+    <None Include="Tests\ScalarVsTableFunction.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CteTest.refactorlog" />
