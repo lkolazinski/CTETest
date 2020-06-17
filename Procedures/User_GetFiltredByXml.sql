@@ -1,7 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[User_GetFiltredMars]
+﻿CREATE PROCEDURE [dbo].[User_GetFiltredByXml]
 (
-	@RoleIdTable [dbo].[TVPUserType] READONLY, -- must be declared as read only
-	@DepartmentIdTable [dbo].[TVPUserType] READONLY, -- must be declared as read only,
+	--@DepartmentIdTable [dbo].[TVPUserType] READONLY, -- must be declared as read only,
+	@RoleIdXml XML,
+	@DepartmentIdXml XML,
 	@SortColumn VARCHAR(100) = NULL,
 	@PageNumber INT = 1,
 	@PageSize INT = 9999999
@@ -11,9 +12,29 @@ BEGIN
 
 	DECLARE @lSortColumn VARCHAR(100) = LOWER(ISNULL(@SortColumn, ''))
 
+	DECLARE @RoleIdTable AS TABLE
+	(
+		[UniqueId] INT PRIMARY KEY
+	)
+
+	INSERT INTO @RoleIdTable([UniqueId])
+	SELECT DISTINCT
+		'Id' = x.v.value('id[1]', 'Int')
+	FROM @RoleIdXml.nodes('/root/row') x(v)
+
 	DECLARE @RoleIsDempty INT = 1
 	IF EXISTS ( SELECT 1 FROM @RoleIdTable )
 		SET @RoleIsDempty = 0
+
+	DECLARE @DepartmentIdTable AS TABLE
+	(
+		[UniqueId] INT PRIMARY KEY
+	)
+
+	INSERT INTO @DepartmentIdTable([UniqueId])
+	SELECT DISTINCT
+		'Id' = x.v.value('id[1]', 'Int')
+	FROM @DepartmentIdXml.nodes('/root/row') x(v)
 
 	DECLARE @DepartmentIsDempty INT = 1
 	IF EXISTS ( SELECT 1 FROM @DepartmentIdTable )
@@ -136,22 +157,76 @@ BEGIN
 END
 
 
-/* Test
+/* Test 
 
-DECLARE @TmpRoleIdTable [dbo].[TVPUserType] 
-INSERT INTO @TmpRoleIdTable VALUES(1)
-INSERT INTO @TmpRoleIdTable VALUES(2)
-INSERT INTO @TmpRoleIdTable VALUES(3)
-INSERT INTO @TmpRoleIdTable VALUES(4)
-INSERT INTO @TmpRoleIdTable VALUES(5)
+-- 1
+--Insert into RoleIdTable
+DECLARE @RoleIdTable AS TABLE
+(
+	[Id] INT PRIMARY KEY
+)
 
-DECLARE @TmpDepartmentIdTable [dbo].[TVPUserType] 
-INSERT INTO @TmpDepartmentIdTable VALUES(1)
-INSERT INTO @TmpDepartmentIdTable VALUES(2)
-INSERT INTO @TmpDepartmentIdTable VALUES(3)
-INSERT INTO @TmpDepartmentIdTable VALUES(4)
-INSERT INTO @TmpDepartmentIdTable VALUES(5)
 
-EXEC [dbo].[User_GetFiltredMars] @TmpRoleIdTable, @TmpDepartmentIdTable, 'name', 1, 200
+DECLARE @RoleIdXml XML = 
+'<root>
+	<row><id>1</id></row>
+	<row><id>2</id></row>
+	<row><id>3</id></row>
+	<row><id>4</id></row>
+	<row><id>4</id></row>
+</root>'
+
+INSERT INTO @RoleIdTable([Id])
+SELECT DISTINCT
+	'Id' = x.v.value('id[1]', 'Int')
+FROM @RoleIdXml.nodes('/root/row') x(v)
+
+--select * from @RoleIdTable
+--
+
+-- 2
+--Insert into DepartmentIdTable
+DECLARE @DepartmentIdTable AS TABLE
+(
+	[Id] INT PRIMARY KEY
+)
+
+
+DECLARE @DepartmentIdXml XML = 
+'<root>
+	<row><id>1</id></row>
+	<row><id>2</id></row>
+	<row><id>3</id></row>
+	<row><id>4</id></row>
+</root>'
+
+
+INSERT INTO @DepartmentIdTable([Id])
+SELECT DISTINCT
+	'Id' = x.v.value('id[1]', 'Int')
+FROM @DepartmentIdXml.nodes('/root/row') x(v)
+
+--select * from @DepartmentIdTable
+
+-- 3
+DECLARE @RoleIdXml XML = 
+'<root>
+	<row><id>1</id></row>
+	<row><id>2</id></row>
+	<row><id>3</id></row>
+	<row><id>4</id></row>
+	<row><id>4</id></row>
+</root>'
+
+DECLARE @DepartmentIdXml XML = 
+'<root>
+	<row><id>1</id></row>
+	<row><id>2</id></row>
+	<row><id>3</id></row>
+	<row><id>4</id></row>
+	<row><id>4</id></row>
+</root>'
+
+EXEC [dbo].[User_GetFiltredByXml] @RoleIdXml, @DepartmentIdXml, 'name', 1, 200
 
 */

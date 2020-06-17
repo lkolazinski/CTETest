@@ -62,6 +62,7 @@
     <Folder Include="Scripts" />
     <Folder Include="Functions" />
     <Folder Include="Scripts\Imports" />
+    <Folder Include="Tests" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\User.sql" />
@@ -98,10 +99,15 @@
     <Build Include="Procedures\Region_Update.sql" />
     <Build Include="Procedures\Role_Update.sql" />
     <Build Include="Procedures\User_Update.sql" />
+    <Build Include="Procedures\User_GetFiltredByXml.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlSchemaCompare1.scmp" />
     <None Include="Scripts\Imports\ImportUsersLocations.sql" />
+    <None Include="Tests\XmlToTableListCardinaleEstimationPlanError.sql" />
+    <None Include="Tests\ExecuteByXmlParams.sql" />
+    <None Include="Tests\ExecuteByTVPParam.sql" />
+    <None Include="Tests\Convert_ImplicitCardinale.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CteTest.refactorlog" />

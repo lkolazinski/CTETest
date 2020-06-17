@@ -5,7 +5,9 @@
 RETURNS @ReturnTable TABLE ([UserNo] INT)
 WITH SCHEMABINDING AS
 BEGIN
-	WITH CTE (UserNo)
+	 DECLARE @MyVariable INT = 0 --deklat
+
+	;WITH CTE (UserNo)
 	AS
 	(
 		SELECT 
@@ -30,7 +32,7 @@ END
 
 /*Test
 --4s
-SELECT * FROM [dbo].[f_UserGetNextUserNoWithBody] (99000)
+SELECT * FROM [dbo].[[ft_UserGetNextUserNoWithBody]] (99000)
 option (maxrecursion 0 )
 
 --9s
