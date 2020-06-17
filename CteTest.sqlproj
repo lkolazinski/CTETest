@@ -119,6 +119,9 @@
     <None Include="Pic\FScalar.png" />
     <None Include="Pic\FTable.png" />
     <None Include="Pic\TABLE_VS_SCALAR_3.png" />
+    <None Include="Pic\TABLE_VS_SCALAR_4.png" />
+    <None Include="Pic\NoParallelPlansInExpress.png" />
+    <None Include="Pic\ParallelOnSqlServer12.0.500.png" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CteTest.refactorlog" />
