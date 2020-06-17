@@ -122,6 +122,7 @@
     <None Include="Pic\TABLE_VS_SCALAR_4.png" />
     <None Include="Pic\NoParallelPlansInExpress.png" />
     <None Include="Pic\ParallelOnSqlServer12.0.500.png" />
+    <None Include="Pic\Heat.png" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CteTest.refactorlog" />
